@@ -73,7 +73,7 @@ h1{margin:0;font-size:clamp(28px,5vw,44px);line-height:1.05}.subtitle{margin:6px
         <div class="logo">🧮</div>
         <div>
           <h1>Mathe-Trainer</h1>
-          <p class="subtitle">Für 9-Jährige: abwechslungsreich, kindgerecht, ohne Rest</p>
+          <p class="subtitle">Für 9-Jährige: abwechslungsreich und kindgerecht</p>
         </div>
       </div>
       <div id="headerHighscore" class="badge" style="background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.25)">🏆 Noch kein Highscore</div>
@@ -257,13 +257,13 @@ function getMultiplicationTip(a,b){
   const y = Math.max(a,b);
   const key = x + 'x' + y;
   const special = {
-    '6x7':'Rechne 5 × 7 = 35 und addiere noch 1 × 7 dazu. Also 35 + 7 = 42.',
-    '6x8':'Rechne 3 × 8 = 24 und verdopple das Ergebnis. Also 24 + 24 = 48.',
-    '7x8':'Rechne 7 × 4 = 28 und verdopple das Ergebnis. Also 28 + 28 = 56.',
-    '7x9':'Rechne 7 × 10 = 70 und ziehe einmal 7 ab. Also 70 - 7 = 63.',
+    '6x7':'Rechne 5 × 7 = 35 und addiere noch 1 × 7 dazu. Also 35 + 7 = xx.',
+    '6x8':'Rechne 3 × 8 = 24 und verdopple das Ergebnis. Also 24 + 24 = xx.',
+    '7x8':'Rechne 7 × 4 = 28 und verdopple das Ergebnis. Also 28 + 28 = xx.',
+    '7x9':'Rechne 7 × 10 = 70 und ziehe einmal 7 ab. Also 70 - 7 = xx.',
     '8x8':'Merke dir diese Quadratzahl: 8 × 8 = 64. Du kannst auch 4 × 8 = 32 rechnen und verdoppeln.',
-    '8x9':'Rechne 8 × 10 = 80 und ziehe einmal 8 ab. Also 80 - 8 = 72.',
-    '9x9':'Rechne 9 × 10 = 90 und ziehe einmal 9 ab. Also 90 - 9 = 81.'
+    '8x9':'Rechne 8 × 10 = 80 und ziehe einmal 8 ab. Also 80 - 8 = xx.',
+    '9x9':'Rechne 9 × 10 = 90 und ziehe einmal 9 ab. Also 90 - 9 = xx.'
   };
   if(special[key]) return special[key];
   if(y === 9) return 'Nutze die 10er-Reihe: Rechne ' + x + ' × 10 und ziehe einmal ' + x + ' ab.';
