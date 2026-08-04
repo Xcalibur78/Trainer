@@ -317,13 +317,13 @@ function getMultiplicationTip(a, b) {
   const y = Math.max(a, b);
   const key = x + 'x' + y;
   const special = {
-    '6x7': 'Rechne 5 × 7 = 35 und addiere noch 1 × 7 dazu. Also 35 + 7 = 42.',
-    '6x8': 'Rechne 3 × 8 = 24 und verdopple das Ergebnis. Also 24 + 24 = 48.',
-    '7x8': 'Rechne 7 × 4 = 28 und verdopple das Ergebnis. Also 28 + 28 = 56.',
-    '7x9': 'Rechne 7 × 10 = 70 und ziehe einmal 7 ab. Also 70 - 7 = 63.',
-    '8x8': 'Merke dir diese Quadratzahl: 8 × 8 = 64. Du kannst auch 4 × 8 = 32 rechnen und verdoppeln.',
-    '8x9': 'Rechne 8 × 10 = 80 und ziehe einmal 8 ab. Also 80 - 8 = 72.',
-    '9x9': 'Rechne 9 × 10 = 90 und ziehe einmal 9 ab. Also 90 - 9 = 81.'
+    '6x7': 'Rechne 5 × 7 = 35 und addiere noch 1 × 7 dazu. Also 35 + 7 = ??.',
+    '6x8': 'Rechne 3 × 8 = 24 und verdopple das Ergebnis. Also 24 + 24 = ??.',
+    '7x8': 'Rechne 7 × 4 = 28 und verdopple das Ergebnis. Also 28 + 28 = ??.',
+    '7x9': 'Rechne 7 × 10 = 70 und ziehe einmal 7 ab. Also 70 - 7 = ??.',
+    '8x8': 'Merke dir diese Quadratzahl: 8 × 8 = ??. Du kannst auch 4 × 8 = 32 rechnen und verdoppeln.',
+    '8x9': 'Rechne 8 × 10 = 80 und ziehe einmal 8 ab. Also 80 - 8 = ??.',
+    '9x9': 'Rechne 9 × 10 = 90 und ziehe einmal 9 ab. Also 90 - 9 = ??.'
   };
   if (special[key]) return special[key];
   if (y === 9) return 'Nutze die 10er-Reihe: Rechne ' + x + ' × 10 und ziehe einmal ' + x + ' ab.';
