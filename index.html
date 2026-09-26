@@ -3,66 +3,157 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mathe-Trainer</title>
-
+<title>Mathe-Trainer für 9-Jährige</title>
 <style>
-body {
-  font-family: Arial;
-  background: #f4f6fb;
-  margin: 0;
-  padding: 20px;
+:root{
+  --red:#c4001a;
+  --red-dark:#970015;
+  --bg:#f4f6fb;
+  --card:#ffffff;
+  --text:#182033;
+  --muted:#667085;
+  --green:#138a36;
+  --yellow:#f6b300;
+  --blue:#2563eb;
+  --shadow:0 18px 46px rgba(16,24,40,.16);
 }
-
-.app {
-  max-width: 700px;
-  margin: auto;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial, Helvetica, sans-serif;
+  color:var(--text);
+  background:linear-gradient(135deg,#fff 0%,#f4f6fb 48%,#ffecef 100%);
+  padding:18px;
 }
-
-.card {
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+.app{width:min(900px,100%);margin:0 auto}
+.card{background:var(--card);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(196,0,26,.08)}
+.header{background:var(--red);color:#fff;padding:26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:60px;height:60px;border-radius:18px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:34px}
+h1{margin:0;font-size:clamp(28px,5vw,44px);line-height:1.05}
+.subtitle{margin:6px 0 0;color:#ffe5e9;font-size:15px}
+.content{padding:24px}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:1fr 1fr}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){
+  .grid.two,.grid.three{grid-template-columns:1fr}
+  .header{align-items:flex-start;flex-direction:column}
+  .content{padding:18px}
 }
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.panel{background:#f8fafc;border:1px solid #edf0f5;border-radius:22px;padding:18px}
+.panel-title{font-weight:900;font-size:20px;margin:0 0 14px;display:flex;gap:8px;align-items:center}
+.options{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media(max-width:640px){
+  .options{grid-template-columns:1fr}
 }
-
-.logo {
-  font-size: 40px;
+.option{border:1px solid #d8dee9;background:white;color:#344054;border-radius:16px;padding:13px 10px;font-weight:900;cursor:pointer;transition:.15s ease;text-align:left}
+.option:hover{background:#f0f0f0}
+.option.active{background:var(--red);color:white;border-color:var(--red-dark)}
+.btn{width:100%;border:0;border-radius:18px;padding:16px 18px;font-size:19px;font-weight:900;cursor:pointer;background:var(--red);color:white;box-shadow:0 10px 22px rgba(196,0,26,.23);transition:.15s ease}
+.btn:hover{background:var(--red-dark);transform:translateY(-2px)}
+.btn.secondary{background:#6b7280;box-shadow:0 10px 22px rgba(0,0,0,.1)}
+.btn.secondary:hover{background:#4b5563}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
+@media(max-width:760px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stats .wide{grid-column:1/-1}
 }
+.stat{background:#fff;border:1px solid #edf0f5;border-radius:18px;padding:12px;text-align:center;font-weight:900}
+.stat small{display:block;color:var(--muted);font-weight:700;margin-top:3px;font-size:12px}
+.progress-wrap{height:13px;background:#edf0f5;border-radius:999px;overflow:hidden;margin:8px 0 20px}
+.progress{height:100%;width:0%;background:var(--red);border-radius:999px;transition:.25s ease}
+.task-box{text-align:center;background:#f8fafc;border:1px solid #edf0f5;border-radius:28px;padding:28px 18px;margin-bottom:16px}
+.badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.badge{background:#fee2e2;color:#c4001a;border:1px solid #fecaca;border-radius:999px;padding:8px 14px;font-weight:900;font-size:14px}
+.task{font-size:clamp(44px,10vw,72px);font-weight:900;margin:12px 0 20px;letter-spacing:-1px}
+.answer{width:min(300px,100%);border:1px solid #ccd2df;border-radius:18px;padding:14px 18px;text-align:center;font-size:24px;font-weight:900;margin:0 auto;display:block}
+.answer:focus{outline:2px solid var(--red);border-color:transparent}
+.tip-box{background:#eff6ff;color:#1e3a8a;border:1px solid #bfdbfe;border-radius:18px;padding:14px 16px;margin:14px 0;font-size:17px;font-weight:800;line-height:1.45;text-align:left}
+.tip-box strong{color:#1d4ed8}
+.feedback{min-height:50px;display:flex;align-items:center;justify-content:center;border-radius:18px;font-size:22px;font-weight:900;margin-bottom:14px;text-align:center}
+.feedback.ok{background:#eaf8ef;color:var(--green)}
+.feedback.bad{background:#fee2e2;color:var(--red)}
+.reward-live{text-align:center;min-height:38px;font-size:24px;font-weight:900;color:#7c2d12;margin-bottom:12px}
+.summary-title{text-align:center;font-size:38px;margin:8px 0}
+.big{text-align:center;font-size:64px;font-weight:900;color:var(--red);margin:16px 0}
+.hidden{display:none!important}
+.hint{color:var(--muted);font-size:14px;line-height:1.45}
+.pill{display:inline-block;background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:5px 10px;margin-right:6px}
+.list{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto;padding-right:4px}
+.row{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #edf0f5;border-radius:12px;padding:10px 14px;font-size:15px}
+.row.wrong{border-color:#fecaca;background:#fff5f5}
+.footer-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+@media(max-width:640px){.footer-actions{grid-template-columns:1fr}}
+.visual-panel{display:flex;align-items:center;justify-content:center;min-height:340px;background:linear-gradient(135deg,#fff7ed,#fff1f2);border-radius:22px;overflow:hidden}
+.css-hero{position:relative;width:100%;max-width:520px;height:340px;border-radius:28px;background:linear-gradient(135deg,#fff7ed,#ffe4e6);overflow:hidden;border:1px solid #fee2e2;box-shadow:inset 0 0 46px rgba(196,0,26,.08)}
+.sun{position:absolute;left:34px;top:32px;width:62px;height:62px;border-radius:50%;background:#fde68a;box-shadow:0 0 0 12px rgba(253,230,138,.28)}
+.decor{position:absolute;border-radius:50%;opacity:.9}
+.decor-a{right:48px;top:42px;width:38px;height:38px;background:#bfdbfe}
+.decor-b{right:62px;bottom:42px;width:54px;height:54px;background:#bbf7d0}
+.mini-symbol{position:absolute;font-weight:900;color:rgba(196,0,26,.22);font-size:34px}
+.symbol-plus{left:128px;top:34px}
+.symbol-times{right:130px;top:112px}
+.symbol-divide{left:58px;bottom:136px}
+.mascot{position:absolute;left:50%;top:24px;transform:translateX(-50%);width:78px;height:78px;border-radius:24px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.math-board{position:absolute;left:58px;right:58px;top:98px;height:166px;background:#fff;border-radius:28px;box-shadow:0 14px 30px rgba(127,29,29,.14);display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px}
+.math-card{border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;letter-spacing:.3px}
+.red-card{background:#fee2e2;color:#c4001a}
+.blue-card{background:#bfdbfe;color:#1e3a8a}
+.green-card{background:#bbf7d0;color:#065f46}
+.yellow-card{background:#fef3c7;color:#92400e}
+.coin-stack{position:absolute;left:32px;bottom:46px;width:96px;height:84px;z-index:4}
+.coin{position:absolute;width:62px;height:62px;border-radius:50%;background:#fbbf24;border:8px solid #fde68a;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.coin-1{left:0;top:0}
+.coin-2{left:24px;top:8px}
+.coin-3{left:20px;top:22px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.star-medal{position:absolute;right:38px;bottom:72px;width:84px;height:84px;border-radius:28px;background:#fff7cc;border:4px solid #facc15;display:flex;align-items:center;justify-content:center;font-size:48px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.level-ribbon{position:absolute;left:50%;transform:translateX(-50%);bottom:48px;background:linear-gradient(135deg,#ef4444,#c4001a);color:#fff;border-radius:999px;padding:12px 24px;font-size:21px;font-weight:900;box-shadow:0 4px 12px rgba(196,0,26,.3)}
+.hero-caption{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:19px;font-weight:900;color:#7f1d1d}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="card">
+    <!-- Header -->
+    <div class="header">
+      <div class="brand">
+        <div class="logo">🧮</div>
+        <div>
+          <h1>Mathe-Trainer</h1>
+          <p class="subtitle">Angepasst an dein Arbeitsblatt-Level</p>
+        </div>
+      </div>
+      <div id="headerHighscore" class="badge" style="background:rgba(255,255,255,0.2); color:#fff; border-color:transparent;">Highscore: <span id="valHighscore">0</span></div>
+    </div>
 
-.badge {
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: #fee2e2;
-  font-weight: bold;
-}
+    <div class="content">
+      
+      <!-- SCREEN 1: Setup / Start -->
+      <div id="screenSetup" class="grid two">
+        <div class="panel">
+          <div class="panel-title"><span>⚙️</span> Aufgabentyp wählen</div>
+          
+          <div class="options" id="optType" style="margin-bottom:20px;">
+            <div class="option active" data-value="mix">🔀 Mix aus allen Blöcken</div>
+            <div class="option" data-value="b1">➕ Block 1: Plus (bis 100)</div>
+            <div class="option" data-value="b2">➖ Block 2: Minus (bis 100)</div>
+            <div class="option" data-value="b3">💯 Block 3: Hunderter-Minus</div>
+            <div class="option" data-value="b4">✖️ Block 4: Punkt vor Strich</div>
+            <div class="option" data-value="b5">⭐ Block 5: Großes 1x1</div>
+            <div class="option" data-value="b6">➗ Block 6: Geteiltrechnen</div>
+          </div>
 
-.options {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
+          <p class="hint" style="margin-bottom:8px;"><strong>Anzahl der Fragen:</strong></p>
+          <div class="options" style="grid-template-columns: repeat(3, 1fr); margin-bottom:24px;" id="optCount">
+            <div class="option active" data-value="12" style="text-align:center;">12 Fragen</div>
+            <div class="option" data-value="18" style="text-align:center;">18 Fragen</div>
+            <div class="option" data-value="24" style="text-align:center;">24 Fragen</div>
+          </div>
 
-.option {
-  padding: 10px 14px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
+          <button class="btn" id="btnStart">Jetzt starten! 🚀</button>
+        </div>
 
-.option.active {
-  background: #c4001a;
-  color: white;
-}
-
-.btn {
-  width: 100%;
-  padding: 14px;
-  background
+        <div class="visual-panel">
+          <div class="css-hero">
