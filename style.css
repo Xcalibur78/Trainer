@@ -1,0 +1,92 @@
+body {
+  font-family: Arial;
+  background: #f4f6fb;
+  margin: 0;
+  padding: 20px;
+}
+
+.app {
+  max-width: 700px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 40px;
+}
+
+.options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.option {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.option.active {
+  background: #c4001a;
+  color: white;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: #c4001a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.task {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.answer {
+  width: 200px;
+  padding: 10px;
+  font-size: 24px;
+  display: block;
+  margin: auto;
+}
+
+.feedback {
+  height: 40px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.feedback.ok {
+  color: green;
+}
+
+.feedback.bad {
+  color: red;
+}
