@@ -35,10 +35,18 @@ body {
   font-size: 40px;
 }
 
+.badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #fee2e2;
+  font-weight: bold;
+}
+
 .options {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .option {
@@ -98,6 +106,13 @@ body {
 .feedback.bad {
   color: red;
 }
+
+.reward {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 10px;
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -113,7 +128,9 @@ body {
           <p class="subtitle">Für 9-Jährige</p>
         </div>
       </div>
-      <div id="headerHighscore" class="badge">Highscore: <span id="valHighscore">0</span></div>
+      <div id="headerHighscore" class="badge">
+        Highscore: <span id="valHighscore">0</span>
+      </div>
     </div>
 
     <div class="content">
@@ -132,7 +149,8 @@ body {
 
         <p>Anzahl der Fragen:</p>
         <div class="options" id="optCount">
-          <div class="option active" data-value="10">10</div>
+          <div class="option active" data-value="5">5</div>
+          <div class="option" data-value="10">10</div>
           <div class="option" data-value="15">15</div>
           <div class="option" data-value="20">20</div>
         </div>
@@ -148,6 +166,7 @@ body {
         </div>
 
         <div id="feedback" class="feedback"></div>
+        <div id="liveReward" class="reward"></div>
 
         <button class="btn" id="btnNext">Weiter</button>
       </div>
@@ -156,6 +175,7 @@ body {
       <div id="screenSummary" class="hidden">
         <h2>Fertig!</h2>
         <p id="summaryText"></p>
+        <p id="summaryReward" class="reward"></p>
         <button class="btn" id="btnRestart">Nochmal spielen</button>
       </div>
 
@@ -164,45 +184,41 @@ body {
 </div>
 
 <script>
-// -----------------------------
 // Zufallsfunktion
-// -----------------------------
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// -----------------------------
 // Aufgabenarten wie im Foto
-// -----------------------------
 function genPlus() {
   const a = rand(10, 99);
   const b = rand(10, 99);
-  return { task: `${a} + ${b}`, solution: a + b, type: "plus" };
+  return { task: `${a} + ${b}`, solution: a + b };
 }
 
 function genMinus() {
   let a = rand(20, 99);
   let b = rand(10, a);
-  return { task: `${a} - ${b}`, solution: a - b, type: "minus" };
+  return { task: `${a} - ${b}`, solution: a - b };
 }
 
 function genBigMinus() {
   const a = [200,300,400,500,600,700,800,900][rand(0,7)];
   const b = rand(10, 20);
-  return { task: `${a} - ${b}`, solution: a - b, type: "bigminus" };
+  return { task: `${a} - ${b}`, solution: a - b };
 }
 
 function genMulPlus() {
   const a = rand(3, 9);
   const b = rand(3, 9);
   const c = rand(10, 70);
-  return { task: `${a} × ${b} + ${c}`, solution: a * b + c, type: "mulplus" };
+  return { task: `${a} × ${b} + ${c}`, solution: a * b + c };
 }
 
 function genMul() {
   const a = rand(20, 70);
   const b = rand(3, 9);
-  return { task: `${a} × ${b}`, solution: a * b, type: "mul" };
+  return { task: `${a} × ${b}`, solution: a * b };
 }
 
 function genDiv() {
@@ -210,14 +226,11 @@ function genDiv() {
   const d = divisors[rand(0,2)];
   const result = rand(30, 100);
   const a = result * d;
-  return { task: `${a} ÷ ${d}`, solution: result, type: "div" };
+  return { task: `${a} ÷ ${d}`, solution: result };
 }
 
-// -----------------------------
-// Mix-Modus mit 3er-Blöcken
-// -----------------------------
+// Mix mit 3er-Blöcken
 const ALL_TYPES = ["plus", "minus", "bigminus", "mulplus", "mul", "div"];
-
 let mixOrder = [];
 let mixIndex = 0;
 let blockCounter = 0;
@@ -226,24 +239,6 @@ function prepareMixOrder() {
   mixOrder = [...ALL_TYPES].sort(() => Math.random() - 0.5);
   mixIndex = 0;
   blockCounter = 0;
-}
-
-function generateMixedTask() {
-  const currentType = mixOrder[mixIndex];
-  const task = generateByType(currentType);
-
-  blockCounter++;
-
-  if (blockCounter >= 3) {
-    mixIndex++;
-    blockCounter = 0;
-
-    if (mixIndex >= mixOrder.length) {
-      prepareMixOrder();
-    }
-  }
-
-  return task;
 }
 
 function generateByType(type) {
@@ -257,11 +252,26 @@ function generateByType(type) {
   }
 }
 
-// -----------------------------
-// SPIELSTEUERUNG
-// -----------------------------
+function generateMixedTask() {
+  const currentType = mixOrder[mixIndex];
+  const task = generateByType(currentType);
+
+  blockCounter++;
+
+  if (blockCounter >= 3) {
+    mixIndex++;
+    blockCounter = 0;
+    if (mixIndex >= mixOrder.length) {
+      prepareMixOrder();
+    }
+  }
+
+  return task;
+}
+
+// Spielsteuerung
 let mode = "mix";
-let totalQuestions = 10;
+let totalQuestions = 5;
 let currentQuestion = 0;
 let correct = 0;
 let currentTask = null;
@@ -273,8 +283,14 @@ const screenSummary = document.getElementById("screenSummary");
 const taskText = document.getElementById("taskText");
 const answerInput = document.getElementById("answerInput");
 const feedback = document.getElementById("feedback");
+const liveReward = document.getElementById("liveReward");
+const valHighscore = document.getElementById("valHighscore");
 
-// Auswahlfelder
+// Highscore laden
+let highscore = Number(localStorage.getItem("mt_highscore") || 0);
+valHighscore.textContent = highscore;
+
+// Auswahl Rechenart
 document.querySelectorAll("#optType .option").forEach(opt => {
   opt.addEventListener("click", () => {
     document.querySelectorAll("#optType .option").forEach(o => o.classList.remove("active"));
@@ -283,6 +299,7 @@ document.querySelectorAll("#optType .option").forEach(opt => {
   });
 });
 
+// Auswahl Anzahl Fragen
 document.querySelectorAll("#optCount .option").forEach(opt => {
   opt.addEventListener("click", () => {
     document.querySelectorAll("#optCount .option").forEach(o => o.classList.remove("active"));
@@ -296,6 +313,7 @@ document.getElementById("btnStart").addEventListener("click", () => {
   prepareMixOrder();
   currentQuestion = 0;
   correct = 0;
+  liveReward.textContent = "";
 
   screenSetup.classList.add("hidden");
   screenQuiz.classList.remove("hidden");
@@ -306,6 +324,7 @@ document.getElementById("btnStart").addEventListener("click", () => {
 // Neue Aufgabe
 function nextTask() {
   feedback.textContent = "";
+  liveReward.textContent = "";
 
   if (currentQuestion >= totalQuestions) {
     showSummary();
@@ -321,7 +340,7 @@ function nextTask() {
   answerInput.focus();
 }
 
-// Antwort prüfen
+// Antwort prüfen + kleine Belohnung
 document.getElementById("btnNext").addEventListener("click", () => {
   const val = Number(answerInput.value);
 
@@ -329,21 +348,49 @@ document.getElementById("btnNext").addEventListener("click", () => {
     feedback.textContent = "Richtig!";
     feedback.className = "feedback ok";
     correct++;
+
+    if (correct % 3 === 0) {
+      liveReward.textContent = "🎉 3 richtige in Folge – Super!";
+    } else {
+      liveReward.textContent = "⭐ Weiter so!";
+    }
   } else {
     feedback.textContent = "Falsch!";
     feedback.className = "feedback bad";
+    liveReward.textContent = "Versuch's nochmal!";
   }
 
-  setTimeout(nextTask, 600);
+  setTimeout(nextTask, 700);
 });
 
-// Zusammenfassung
+// Zusammenfassung + große Belohnung
 function showSummary() {
   screenQuiz.classList.add("hidden");
   screenSummary.classList.remove("hidden");
 
   document.getElementById("summaryText").textContent =
     `Du hast ${correct} von ${totalQuestions} richtig.`;
+
+  let rewardText = "";
+  const ratio = correct / totalQuestions;
+
+  if (ratio === 1) {
+    rewardText = "🏅 Gold-Medaille! Perfekt!";
+  } else if (ratio >= 0.8) {
+    rewardText = "🥈 Silber-Medaille! Sehr stark!";
+  } else if (ratio >= 0.5) {
+    rewardText = "🥉 Bronze-Medaille! Gut gemacht!";
+  } else {
+    rewardText = "⭐ Du hast geübt – weiter so!";
+  }
+
+  document.getElementById("summaryReward").textContent = rewardText;
+
+  if (correct > highscore) {
+    highscore = correct;
+    localStorage.setItem("mt_highscore", String(highscore));
+    valHighscore.textContent = highscore;
+  }
 }
 
 // Neustart
