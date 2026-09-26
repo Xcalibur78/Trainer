@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mathe-Trainer</title>
+<title>Mathe-Trainer die besten Kinder der Welt</title>
 
 <style>
 :root{
@@ -14,7 +14,10 @@
   --text:#182033;
   --muted:#667085;
   --green:#138a36;
-  --shadow:0 18px 46px rgba(16,24,40,.16);
+  --blue:#2563eb;
+  --yellow:#f6b300;
+  --border:#e5e7eb;
+  --shadow:0 18px 46px rgba(16,24,40,.15);
 }
 
 *{
@@ -24,10 +27,25 @@
 body{
   margin:0;
   min-height:100vh;
+  padding:18px;
   font-family:Arial,Helvetica,sans-serif;
   color:var(--text);
-  background:linear-gradient(135deg,#fff 0%,#f4f6fb 50%,#ffecef 100%);
-  padding:18px;
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f4f6fb 50%,
+      #ffecef 100%
+    );
+}
+
+button,
+input{
+  font-family:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
 }
 
 .app{
@@ -36,23 +54,25 @@ body{
 }
 
 .card{
-  background:var(--card);
+  background:#fff;
   border-radius:28px;
-  box-shadow:var(--shadow);
   overflow:hidden;
+  box-shadow:var(--shadow);
   border:1px solid rgba(196,0,26,.08);
 }
 
-/* ================= HEADER ================= */
+/* =========================
+   HEADER
+========================= */
 
 .header{
   background:var(--red);
   color:#fff;
-  padding:26px;
+  padding:24px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:16px;
+  align-items:center;
+  gap:18px;
 }
 
 .brand{
@@ -62,42 +82,37 @@ body{
 }
 
 .logo{
-  width:60px;
-  height:60px;
+  width:62px;
+  height:62px;
   border-radius:18px;
-  background:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.17);
   display:grid;
   place-items:center;
   font-size:34px;
-  flex-shrink:0;
 }
 
 h1{
   margin:0;
   font-size:clamp(28px,5vw,44px);
-  line-height:1.05;
+  line-height:1;
 }
 
 .subtitle{
   margin:7px 0 0;
   color:#ffe5e9;
-  font-size:16px;
+  font-size:15px;
 }
-
-.header-badge{
-  background:rgba(255,255,255,.16);
-  color:white;
-  border:1px solid rgba(255,255,255,.3);
-  border-radius:999px;
-  padding:10px 15px;
-  font-weight:900;
-  white-space:nowrap;
-}
-
-/* ================= CONTENT ================= */
 
 .content{
   padding:24px;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+.hidden{
+  display:none !important;
 }
 
 .grid{
@@ -109,69 +124,49 @@ h1{
   grid-template-columns:1fr 1fr;
 }
 
-@media(max-width:760px){
-  .grid.two{
-    grid-template-columns:1fr;
-  }
-
-  .header{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .content{
-    padding:18px;
-  }
-
-  .header-badge{
-    align-self:flex-start;
-  }
-}
-
-/* ================= PANELS ================= */
-
 .panel{
   background:#f8fafc;
   border:1px solid #edf0f5;
   border-radius:22px;
-  padding:20px;
+  padding:18px;
 }
 
 .panel-title{
+  margin:0 0 14px;
+  font-size:20px;
   font-weight:900;
-  font-size:21px;
-  margin:0 0 15px;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
-/* ================= OPTIONS ================= */
+.hint{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* =========================
+   OPTIONS
+========================= */
 
 .options{
   display:grid;
   gap:10px;
   grid-template-columns:repeat(3,1fr);
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
-.options.three{
-  grid-template-columns:repeat(3,1fr);
-}
-
-@media(max-width:560px){
-  .options{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .options.three{
-    grid-template-columns:repeat(3,1fr);
-  }
+.options.two{
+  grid-template-columns:repeat(2,1fr);
 }
 
 .option{
-  border:2px solid #d8dee9;
+  border:1px solid #d8dee9;
   background:#fff;
   color:#344054;
   border-radius:16px;
-  padding:13px 8px;
+  padding:14px 10px;
   font-size:16px;
   font-weight:900;
   cursor:pointer;
@@ -179,23 +174,25 @@ h1{
 }
 
 .option:hover{
-  background:#f8e8eb;
+  background:#f3f4f6;
 }
 
 .option.active{
   background:var(--red);
-  color:#fff;
   border-color:var(--red);
+  color:#fff;
 }
 
-/* ================= BUTTONS ================= */
+/* =========================
+   BUTTONS
+========================= */
 
 .btn{
   width:100%;
   border:0;
   border-radius:18px;
   padding:16px 18px;
-  font-size:19px;
+  font-size:18px;
   font-weight:900;
   cursor:pointer;
   background:var(--red);
@@ -206,7 +203,7 @@ h1{
 
 .btn:hover{
   background:var(--red-dark);
-  transform:translateY(-1px);
+  transform:translateY(-2px);
 }
 
 .btn.secondary{
@@ -218,106 +215,175 @@ h1{
   background:#4b5563;
 }
 
-/* ================= START-BILD ================= */
+.btn.green{
+  background:var(--green);
+}
 
-.hero{
-  min-height:390px;
-  background:linear-gradient(135deg,#fff7ed,#ffe4e6);
-  border:1px solid #fee2e2;
-  border-radius:24px;
-  position:relative;
-  overflow:hidden;
+/* =========================
+   START VISUAL
+========================= */
+
+.visual{
+  min-height:340px;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:25px;
+  background:linear-gradient(135deg,#fff7ed,#fff1f2);
+  overflow:hidden;
 }
 
-.hero-content{
+.hero{
   position:relative;
-  z-index:2;
+  width:100%;
+  max-width:520px;
+  height:320px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#fff7ed,#ffe4e6);
+  border:1px solid #fee2e2;
+  overflow:hidden;
 }
 
-.hero-mascot{
-  font-size:76px;
-  margin-bottom:10px;
+.sun{
+  position:absolute;
+  left:28px;
+  top:28px;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#fde68a;
+  box-shadow:0 0 0 12px rgba(253,230,138,.28);
 }
 
-.hero h2{
-  margin:0;
-  color:#991b1b;
-  font-size:30px;
+.circle-blue{
+  position:absolute;
+  right:35px;
+  top:42px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#bfdbfe;
 }
 
-.hero p{
-  color:#7f1d1d;
-  font-weight:700;
-  font-size:17px;
-  line-height:1.5;
+.circle-green{
+  position:absolute;
+  right:55px;
+  bottom:40px;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#bbf7d0;
 }
 
-.math-examples{
+.robot{
+  position:absolute;
+  top:22px;
+  left:50%;
+  transform:translateX(-50%);
+  width:70px;
+  height:70px;
+  background:#fff;
+  border-radius:22px;
+  display:grid;
+  place-items:center;
+  font-size:40px;
+  box-shadow:0 5px 14px rgba(0,0,0,.1);
+}
+
+.math-board{
+  position:absolute;
+  left:50px;
+  right:50px;
+  top:92px;
+  height:155px;
+  background:#fff;
+  border-radius:24px;
+  padding:12px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:20px;
+  gap:12px;
+  box-shadow:0 14px 30px rgba(127,29,29,.14);
 }
 
-.math-example{
-  background:#fff;
-  border-radius:15px;
-  padding:12px;
-  font-size:21px;
+.math-box{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:17px;
+  font-size:25px;
   font-weight:900;
-  box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
-.math-example:nth-child(1){
+.math-red{
+  background:#fee2e2;
   color:#c4001a;
 }
 
-.math-example:nth-child(2){
-  color:#2563eb;
+.math-blue{
+  background:#dbeafe;
+  color:#1e3a8a;
 }
 
-.math-example:nth-child(3){
-  color:#138a36;
+.math-green{
+  background:#dcfce7;
+  color:#166534;
 }
 
-.math-example:nth-child(4){
+.math-yellow{
+  background:#fef3c7;
   color:#92400e;
 }
 
-/* ================= INFO ================= */
-
-.info{
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-  border-radius:18px;
-  padding:14px 16px;
-  line-height:1.5;
-  font-weight:700;
-  margin-top:5px;
+.medal{
+  position:absolute;
+  right:30px;
+  bottom:43px;
+  width:70px;
+  height:70px;
+  border-radius:22px;
+  background:#fff7cc;
+  border:4px solid #facc15;
+  display:grid;
+  place-items:center;
+  font-size:40px;
 }
 
-/* ================= STATS ================= */
+.ribbon{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:25px;
+  background:linear-gradient(135deg,#ef4444,#c4001a);
+  color:#fff;
+  border-radius:999px;
+  padding:9px 20px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+/* =========================
+   BADGE
+========================= */
+
+.badge{
+  display:inline-block;
+  background:#fee2e2;
+  color:#c4001a;
+  border:1px solid #fecaca;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:14px;
+  font-weight:900;
+}
+
+/* =========================
+   TRAINING STATS
+========================= */
 
 .stats{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:10px;
   margin-bottom:18px;
-}
-
-@media(max-width:760px){
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .stats .wide{
-    grid-column:1/-1;
-  }
 }
 
 .stat{
@@ -327,109 +393,90 @@ h1{
   padding:12px;
   text-align:center;
   font-weight:900;
-  font-size:18px;
 }
 
 .stat small{
   display:block;
+  margin-top:3px;
   color:var(--muted);
   font-weight:700;
-  margin-top:4px;
   font-size:12px;
 }
-
-/* ================= PROGRESS ================= */
 
 .progress-wrap{
   height:13px;
   background:#edf0f5;
   border-radius:999px;
   overflow:hidden;
-  margin:8px 0 20px;
+  margin-bottom:20px;
 }
 
 .progress{
+  width:0;
   height:100%;
-  width:0%;
   background:var(--red);
   border-radius:999px;
-  transition:.25s ease;
+  transition:.25s;
 }
 
-/* ================= AUFGABE ================= */
+/* =========================
+   TASK
+========================= */
 
 .task-box{
   text-align:center;
   background:#f8fafc;
   border:1px solid #edf0f5;
   border-radius:28px;
-  padding:28px 18px;
+  padding:26px 18px;
   margin-bottom:16px;
 }
 
 .badges{
   display:flex;
   justify-content:center;
+  align-items:center;
   gap:8px;
   flex-wrap:wrap;
-  margin-bottom:18px;
-}
-
-.badge{
-  background:#fee2e2;
-  color:#c4001a;
-  border:1px solid #fecaca;
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:900;
-  font-size:14px;
+  margin-bottom:14px;
 }
 
 .task{
-  font-size:clamp(44px,10vw,78px);
+  font-size:clamp(42px,10vw,76px);
   font-weight:900;
-  margin:15px 0 25px;
+  margin:18px 0 22px;
   letter-spacing:-1px;
 }
 
 .answer{
   width:min(300px,100%);
+  display:block;
+  margin:0 auto;
   border:2px solid #ccd2df;
   border-radius:18px;
   padding:14px 18px;
   text-align:center;
-  font-size:25px;
+  font-size:22px;
   font-weight:900;
-  margin:0 auto;
+  outline:none;
 }
 
 .answer:focus{
-  outline:none;
   border-color:var(--red);
   box-shadow:0 0 0 4px rgba(196,0,26,.1);
 }
 
-/* ================= FEEDBACK ================= */
-
-.tip-box{
-  background:#eff6ff;
-  color:#1e3a8a;
-  border:1px solid #bfdbfe;
-  border-radius:18px;
-  padding:14px 16px;
-  margin-bottom:14px;
-  font-size:17px;
-  font-weight:800;
-  line-height:1.45;
-}
+/* =========================
+   FEEDBACK
+========================= */
 
 .feedback{
-  min-height:55px;
+  min-height:50px;
   display:flex;
   align-items:center;
   justify-content:center;
   border-radius:18px;
-  font-size:22px;
+  font-size:21px;
   font-weight:900;
   margin-bottom:14px;
   text-align:center;
@@ -445,16 +492,30 @@ h1{
   color:var(--red);
 }
 
-.reward-live{
-  min-height:38px;
+.tip{
+  background:#eff6ff;
+  color:#1e3a8a;
+  border:1px solid #bfdbfe;
+  border-radius:18px;
+  padding:14px 16px;
+  margin-bottom:14px;
+  font-size:16px;
+  font-weight:800;
+  line-height:1.5;
+}
+
+.reward{
+  min-height:36px;
   text-align:center;
   font-size:22px;
   font-weight:900;
   color:#7c2d12;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
-/* ================= SUMMARY ================= */
+/* =========================
+   SUMMARY
+========================= */
 
 .summary-title{
   text-align:center;
@@ -462,17 +523,17 @@ h1{
   margin:8px 0;
 }
 
-.big{
+.percent{
   text-align:center;
   font-size:64px;
   font-weight:900;
   color:var(--red);
-  margin:16px 0 5px;
+  margin:12px 0;
 }
 
 .stars{
   text-align:center;
-  font-size:42px;
+  font-size:38px;
   margin-bottom:20px;
 }
 
@@ -506,30 +567,110 @@ h1{
   margin-top:16px;
 }
 
-@media(max-width:640px){
-  .footer-actions{
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:760px){
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .grid.two{
     grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .stat.wide{
+    grid-column:1/-1;
+  }
+
+  .content{
+    padding:18px;
+  }
+
+  .visual{
+    min-height:300px;
   }
 }
 
-.hidden{
-  display:none!important;
+@media(max-width:600px){
+
+  .options,
+  .options.two{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .footer-actions{
+    grid-template-columns:1fr;
+  }
+
+  .math-board{
+    left:25px;
+    right:25px;
+  }
+
+  .medal{
+    display:none;
+  }
+
+  .ribbon{
+    font-size:15px;
+  }
 }
 
-/* ================= PRINT ================= */
+@media(max-width:420px){
 
+  body{
+    padding:8px;
+  }
+
+  .header{
+    padding:18px;
+  }
+
+  .logo{
+    width:52px;
+    height:52px;
+    font-size:28px;
+  }
+
+  .options,
+  .options.two{
+    grid-template-columns:1fr;
+  }
+
+  .task{
+    font-size:42px;
+  }
+}
+
+/* Druck */
 @media print{
   body{
     background:#fff;
     padding:0;
   }
 
-  .card{
-    box-shadow:none;
+  .header,
+  .footer-actions,
+  #startScreen,
+  #trainingScreen{
+    display:none !important;
   }
 
-  .footer-actions{
-    display:none;
+  .card{
+    box-shadow:none;
+    border:0;
+  }
+
+  .content{
+    padding:0;
   }
 }
 </style>
@@ -541,29 +682,34 @@ h1{
 
 <div class="card">
 
-<!-- =====================================================
+<!-- =========================
      HEADER
-===================================================== -->
+========================= -->
 
 <header class="header">
 
   <div class="brand">
 
-    <div class="logo">
-      🧮
-    </div>
+    <div class="logo">🧮</div>
 
     <div>
       <h1>Mathe-Trainer</h1>
       <p class="subtitle">
-        Für 9-Jährige – passend zum Arbeitsblatt
+        Rechnen üben – Schritt für Schritt
       </p>
     </div>
 
   </div>
 
-  <div id="headerHighscore"
-       class="header-badge">
+  <div
+    id="headerHighscore"
+    class="badge"
+    style="
+      background:rgba(255,255,255,.16);
+      color:#fff;
+      border-color:rgba(255,255,255,.25);
+    "
+  >
     🏆 Noch kein Highscore
   </div>
 
@@ -573,9 +719,9 @@ h1{
 <div class="content">
 
 
-<!-- =====================================================
+<!-- ==================================================
      STARTSEITE
-===================================================== -->
+================================================== -->
 
 <section id="startScreen">
 
@@ -589,72 +735,64 @@ h1{
         ⚙️ Training einstellen
       </p>
 
-
       <p><strong>Aufgabenart</strong></p>
 
-      <div class="options" id="opOptions">
+      <div class="options" id="typeOptions">
 
         <button
           class="option active"
-          data-op="mix"
-          aria-pressed="true">
-          🔀 Gemischt
+          data-type="mixed"
+          aria-pressed="true"
+        >
+          🎲 Gemischt
         </button>
 
         <button
           class="option"
-          data-op="plus"
-          aria-pressed="false">
+          data-type="plus"
+          aria-pressed="false"
+        >
           ➕ Plus
         </button>
 
         <button
           class="option"
-          data-op="minus"
-          aria-pressed="false">
+          data-type="minus"
+          aria-pressed="false"
+        >
           ➖ Minus
         </button>
 
         <button
           class="option"
-          data-op="mulplus"
-          aria-pressed="false">
+          data-type="hundreds"
+          aria-pressed="false"
+        >
+          💯 Hunderter
+        </button>
+
+        <button
+          class="option"
+          data-type="mixedMultiply"
+          aria-pressed="false"
+        >
           ✖️ Mal + Plus
         </button>
 
         <button
           class="option"
-          data-op="mul"
-          aria-pressed="false">
+          data-type="multiply"
+          aria-pressed="false"
+        >
           ✖️ Mal
         </button>
 
         <button
           class="option"
-          data-op="div"
-          aria-pressed="false">
+          data-type="divide"
+          aria-pressed="false"
+        >
           ➗ Teilen
-        </button>
-
-      </div>
-
-
-      <p><strong>Trainingstyp</strong></p>
-
-      <div class="options">
-
-        <button
-          class="option active"
-          data-mode="balanced"
-          aria-pressed="true">
-          😊 Ausgewogen
-        </button>
-
-        <button
-          class="option"
-          data-mode="focus"
-          aria-pressed="false">
-          🎯 Stolperaufgaben
         </button>
 
       </div>
@@ -662,86 +800,85 @@ h1{
 
       <p><strong>Anzahl Aufgaben</strong></p>
 
-      <div class="options three"
-           id="amountOptions">
+      <div class="options two" id="amountOptions">
 
         <button
           class="option"
           data-amount="4"
-          aria-pressed="false">
-          4
+          aria-pressed="false"
+        >
+          4 Aufgaben
         </button>
 
         <button
           class="option active"
           data-amount="8"
-          aria-pressed="true">
-          8
+          aria-pressed="true"
+        >
+          8 Aufgaben
         </button>
 
         <button
           class="option"
           data-amount="12"
-          aria-pressed="false">
-          12
+          aria-pressed="false"
+        >
+          12 Aufgaben
         </button>
 
       </div>
 
 
-      <div class="info">
-
-        📚 <strong>Die Aufgaben sind an dein Arbeitsblatt
-        angepasst.</strong>
-
-        <br><br>
-
-        Plus und Minus mit zweistelligen Zahlen,
-        Hunderter-Aufgaben, Malaufgaben,
-        Mal-und-Plus sowie Division ohne Rest.
-
-      </div>
+      <p class="hint">
+        Die Aufgaben werden jedes Mal neu erzeugt.
+        Bei Division entstehen nur Aufgaben mit ganzen Ergebnissen.
+      </p>
 
     </div>
 
 
     <!-- BILD -->
 
-    <div class="hero">
+    <div class="panel visual">
 
-      <div class="hero-content">
+      <div class="hero">
 
-        <div class="hero-mascot">
-          🤖📚⭐
+        <div class="sun"></div>
+
+        <div class="circle-blue"></div>
+
+        <div class="circle-green"></div>
+
+        <div class="robot">
+          🤖
         </div>
 
-        <h2>
-          Bereit zum Rechnen?
-        </h2>
+        <div class="math-board">
 
-        <p>
-          Rechne Schritt für Schritt.<br>
-          Für jede richtige Antwort gibt es eine Münze!
-        </p>
-
-        <div class="math-examples">
-
-          <div class="math-example">
+          <div class="math-box math-red">
             53 + 29
           </div>
 
-          <div class="math-example">
+          <div class="math-box math-blue">
             88 − 19
           </div>
 
-          <div class="math-example">
+          <div class="math-box math-green">
             7 · 16
           </div>
 
-          <div class="math-example">
+          <div class="math-box math-yellow">
             123 : 3
           </div>
 
+        </div>
+
+        <div class="medal">
+          ⭐
+        </div>
+
+        <div class="ribbon">
+          🏆 Rechnen macht Spaß!
         </div>
 
       </div>
@@ -751,18 +888,22 @@ h1{
   </div>
 
 
-  <div class="grid two"
-       style="margin-top:16px">
+  <div
+    class="grid two"
+    style="margin-top:16px"
+  >
 
     <button
+      id="startButton"
       class="btn"
-      onclick="startTraining()">
+    >
       ▶️ Training starten
     </button>
 
     <button
+      id="resetButton"
       class="btn secondary"
-      onclick="resetAll()">
+    >
       🗑️ Fortschritt löschen
     </button>
 
@@ -771,39 +912,45 @@ h1{
 </section>
 
 
-<!-- =====================================================
+<!-- ==================================================
      TRAINING
-===================================================== -->
+================================================== -->
 
-<section id="trainingScreen"
-         class="hidden">
-
+<section
+  id="trainingScreen"
+  class="hidden"
+>
 
   <div class="stats">
 
     <div class="stat">
-      <span id="currentNo">1</span> /
+      <span id="currentNo">1</span>
+      /
       <span id="totalNo">8</span>
       <small>Aufgabe</small>
     </div>
 
     <div class="stat">
-      ✅ <span id="score">0</span>
+      ✅
+      <span id="score">0</span>
       <small>richtig</small>
     </div>
 
     <div class="stat">
-      🪙 <span id="coins">0</span>
+      🪙
+      <span id="coins">0</span>
       <small>Münzen</small>
     </div>
 
     <div class="stat">
-      ⭐ <span id="levelText">1</span>
+      ⭐
+      <span id="level">1</span>
       <small>Level</small>
     </div>
 
     <div class="stat wide">
-      ⏱ <span id="timer">00:00</span>
+      ⏱
+      <span id="timer">00:00</span>
       <small>Zeit</small>
     </div>
 
@@ -812,9 +959,10 @@ h1{
 
   <div class="progress-wrap">
 
-    <div id="progress"
-         class="progress">
-    </div>
+    <div
+      id="progress"
+      class="progress"
+    ></div>
 
   </div>
 
@@ -824,37 +972,29 @@ h1{
     <div class="badges">
 
       <span
+        id="typeBadge"
         class="badge"
-        id="typeBadge">
+      >
         Gemischt
       </span>
 
       <span
+        id="difficultyBadge"
         class="badge"
-        id="difficultyBadge">
-        Aufgabe
-      </span>
-
-      <span
-        class="badge"
-        id="rewardBadge">
-        🎁 Noch keine Belohnung
+      >
+        Übung
       </span>
 
     </div>
 
 
-    <div id="task"
-         class="task">
+    <div
+      id="task"
+      class="task"
+    >
       53 + 29 = ?
     </div>
 
-
-    <label
-      for="answer"
-      class="hidden">
-      Antwort
-    </label>
 
     <input
       id="answer"
@@ -862,39 +1002,45 @@ h1{
       type="number"
       inputmode="numeric"
       autocomplete="off"
-      placeholder="Antwort">
+      placeholder="Antwort"
+      aria-label="Antwort"
+    >
 
   </div>
 
 
-  <div id="tipBox"
-       class="tip-box hidden">
-  </div>
+  <div
+    id="tipBox"
+    class="tip hidden"
+  ></div>
 
 
-  <div id="feedback"
-       class="feedback">
-  </div>
+  <div
+    id="feedback"
+    class="feedback"
+  ></div>
 
 
-  <div id="rewardLive"
-       class="reward-live">
-  </div>
+  <div
+    id="reward"
+    class="reward"
+  ></div>
 
 
   <div class="grid two">
 
     <button
-      id="checkBtn"
+      id="checkButton"
       class="btn"
-      onclick="checkAnswer()">
+    >
       Prüfen
     </button>
 
     <button
+      id="homeButton"
       class="btn secondary"
-      onclick="goHome()">
-      🏠 Startseite
+    >
+      Startseite
     </button>
 
   </div>
@@ -902,26 +1048,31 @@ h1{
 </section>
 
 
-<!-- =====================================================
+<!-- ==================================================
      AUSWERTUNG
-===================================================== -->
+================================================== -->
 
-<section id="summaryScreen"
-         class="hidden">
+<section
+  id="summaryScreen"
+  class="hidden"
+>
 
   <h2 class="summary-title">
     🏆 Training beendet
   </h2>
 
-
-  <div class="big">
-    <span id="finalPercent">0</span>%
+  <div
+    id="finalPercent"
+    class="percent"
+  >
+    0%
   </div>
 
-
-  <div id="finalStars"
-       class="stars">
-    ⭐
+  <div
+    id="finalStars"
+    class="stars"
+  >
+    💪
   </div>
 
 
@@ -938,32 +1089,45 @@ h1{
     </div>
 
     <div class="stat">
-      🪙 <span id="finalCoins">0</span>
+      🪙
+      <span id="finalCoins">0</span>
       <small>Münzen</small>
     </div>
 
     <div class="stat">
-      ⭐ <span id="finalLevel">1</span>
+      ⭐
+      <span id="finalLevel">1</span>
       <small>Level</small>
     </div>
 
     <div class="stat wide">
-      ⏱ <span id="finalTime">00:00</span>
+      ⏱
+      <span id="finalTime">00:00</span>
       <small>Zeit</small>
     </div>
 
   </div>
 
 
-  <div class="panel"
-       style="text-align:center;margin-bottom:16px">
+  <div
+    class="panel"
+    style="text-align:center;margin-bottom:16px"
+  >
 
-    <p class="panel-title">
+    <p
+      class="panel-title"
+      style="justify-content:center"
+    >
       🎁 Deine Belohnung
     </p>
 
-    <div id="finalReward"
-         style="font-size:34px;font-weight:900">
+    <div
+      id="finalReward"
+      style="
+        font-size:32px;
+        font-weight:900;
+      "
+    >
       🥉 Bronze-Pokal
     </div>
 
@@ -978,9 +1142,10 @@ h1{
         ❌ Fehler zum Üben
       </p>
 
-      <div id="wrongList"
-           class="list">
-      </div>
+      <div
+        id="wrongList"
+        class="list"
+      ></div>
 
     </div>
 
@@ -991,9 +1156,10 @@ h1{
         📋 Alle Aufgaben
       </p>
 
-      <div id="allList"
-           class="list">
-      </div>
+      <div
+        id="allList"
+        class="list"
+      ></div>
 
     </div>
 
@@ -1003,26 +1169,30 @@ h1{
   <div class="footer-actions">
 
     <button
+      id="newTrainingButton"
       class="btn"
-      onclick="startTraining()">
+    >
       🔄 Neues Training
     </button>
 
     <button
+      id="repeatWrongButton"
       class="btn secondary"
-      onclick="repeatWrong()">
+    >
       ❌ Fehler wiederholen
     </button>
 
     <button
+      id="summaryHomeButton"
       class="btn secondary"
-      onclick="goHome()">
+    >
       🏠 Startseite
     </button>
 
     <button
+      id="printButton"
       class="btn secondary"
-      onclick="window.print()">
+    >
       🖨️ Auswertung drucken
     </button>
 
@@ -1036,65 +1206,124 @@ h1{
 
 
 <script>
+/* =====================================================
+   MATHE-TRAINER
+   Komplett neue Aufgabenstruktur
+===================================================== */
 
-/* =========================================================
+
+/* -----------------------------------------------------
    EINSTELLUNGEN
-========================================================= */
+----------------------------------------------------- */
 
 const settings = {
-  operation: "mix",
-  mode: "balanced",
+  type: "mixed",
   amount: 8
 };
 
+
+/* -----------------------------------------------------
+   SPIELVARIABLEN
+----------------------------------------------------- */
+
 let tasks = [];
-let wrongRepeatTasks = [];
 let answers = [];
 
-let current = 0;
+let currentIndex = 0;
 let score = 0;
 let coins = 0;
-let level = 1;
+let playerLevel = 1;
+
 let seconds = 0;
 let timer = null;
-let checked = false;
 
-const $ = id =>
-  document.getElementById(id);
+let taskChecked = false;
 
-const memoryStore = {};
+let wrongTasks = [];
 
 
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
+/* -----------------------------------------------------
+   HILFSFUNKTIONEN
+----------------------------------------------------- */
 
-function safeStorageGet(key, fallback){
+function $(id){
+  return document.getElementById(id);
+}
+
+
+function rand(min,max){
+  return Math.floor(
+    Math.random() * (max - min + 1)
+  ) + min;
+}
+
+
+function choose(array){
+  return array[
+    Math.floor(Math.random() * array.length)
+  ];
+}
+
+
+function shuffle(array){
+
+  const copy = [...array];
+
+  for(let i = copy.length - 1; i > 0; i--){
+
+    const j = Math.floor(
+      Math.random() * (i + 1)
+    );
+
+    [copy[i],copy[j]] =
+      [copy[j],copy[i]];
+  }
+
+  return copy;
+}
+
+
+function formatTime(totalSeconds){
+
+  const minutes =
+    String(
+      Math.floor(totalSeconds / 60)
+    ).padStart(2,"0");
+
+  const secondsPart =
+    String(
+      totalSeconds % 60
+    ).padStart(2,"0");
+
+  return minutes + ":" + secondsPart;
+}
+
+
+/* -----------------------------------------------------
+   STORAGE
+----------------------------------------------------- */
+
+function getStorage(key,fallback){
 
   try{
 
     const value =
       localStorage.getItem(key);
 
-    return value
-      ? JSON.parse(value)
-      : fallback;
+    if(value === null){
+      return fallback;
+    }
+
+    return JSON.parse(value);
 
   }catch(error){
 
-    return Object.prototype.hasOwnProperty.call(
-      memoryStore,
-      key
-    )
-      ? memoryStore[key]
-      : fallback;
-
+    return fallback;
   }
-
 }
 
 
-function safeStorageSet(key,value){
+function setStorage(key,value){
 
   try{
 
@@ -1105,14 +1334,12 @@ function safeStorageSet(key,value){
 
   }catch(error){
 
-    memoryStore[key] = value;
-
+    /* Falls localStorage nicht verfügbar ist */
   }
-
 }
 
 
-function safeStorageRemove(key){
+function removeStorage(key){
 
   try{
 
@@ -1120,451 +1347,425 @@ function safeStorageRemove(key){
 
   }catch(error){
 
-    delete memoryStore[key];
-
+    /* nichts */
   }
-
 }
 
 
-/* =========================================================
-   HILFSFUNKTIONEN
-========================================================= */
+/* -----------------------------------------------------
+   AUFGABENOBJEKT
+   ALLE AUFGABEN HABEN DIE GLEICHE STRUKTUR
+----------------------------------------------------- */
 
-function choose(array){
-
-  return array[
-    Math.floor(
-      Math.random() * array.length
-    )
-  ];
-
-}
-
-
-function formatTime(seconds){
-
-  const minutes =
-    String(
-      Math.floor(seconds / 60)
-    ).padStart(2,"0");
-
-  const sec =
-    String(
-      seconds % 60
-    ).padStart(2,"0");
-
-  return minutes + ":" + sec;
-
-}
-
-
-/* =========================================================
-   PLUS
-========================================================= */
-
-function createAddition(){
-
-  const examples = [
-
-    [53,29],
-    [33,39],
-    [25,49],
-    [46,46],
-
-    [34,47],
-    [78,16],
-    [15,67],
-    [66,17],
-
-    [18,55],
-    [24,58],
-    [53,48],
-    [38,35]
-
-  ];
-
-  const p = choose(examples);
+function createTask(
+  text,
+  answer,
+  type,
+  tip
+){
 
   return {
-    q:`${p[0]} + ${p[1]}`,
-    a:p[0] + p[1],
-    type:"➕ Plus",
-    difficulty:"Zweizellig",
-    key:`plus-${p[0]}-${p[1]}`
-  };
 
+    text: String(text),
+
+    answer: Number(answer),
+
+    type: String(type),
+
+    tip: String(tip || "")
+
+  };
 }
 
 
-/* =========================================================
-   MINUS
-========================================================= */
+/* =====================================================
+   AUFGABEN GENERIEREN
+===================================================== */
 
-function createSubtraction(){
 
-  const examples = [
+/* -----------------------------------------------------
+   1. PLUS
+   Beispiele:
+   53 + 29
+   47 + 35
+----------------------------------------------------- */
 
-    [88,19],
-    [84,46],
-    [52,33],
-    [44,26],
+function generatePlus(){
 
-    [38,19],
-    [25,14],
-    [75,37],
+  const a = rand(20,89);
 
-    [67,29],
-    [53,27],
-    [95,27],
-    [42,24]
+  const b = rand(10,99);
+
+  return createTask(
+
+    `${a} + ${b}`,
+
+    a + b,
+
+    "➕ Plus",
+
+    "Tipp: Rechne zuerst die Einer und dann die Zehner."
+  );
+}
+
+
+/* -----------------------------------------------------
+   2. MINUS
+   Beispiele:
+   88 - 19
+   74 - 28
+----------------------------------------------------- */
+
+function generateMinus(){
+
+  const a = rand(40,99);
+
+  const b = rand(10,a - 1);
+
+  return createTask(
+
+    `${a} − ${b}`,
+
+    a - b,
+
+    "➖ Minus",
+
+    "Tipp: Rechne Schritt für Schritt. Erst die Einer, dann die Zehner."
+  );
+}
+
+
+/* -----------------------------------------------------
+   3. HUNDERTER-MINUS
+   Beispiele:
+   600 - 12
+   400 - 27
+   800 - 35
+----------------------------------------------------- */
+
+function generateHundreds(){
+
+  const hundreds =
+    rand(2,9) * 100;
+
+  const b =
+    rand(10,99);
+
+  return createTask(
+
+    `${hundreds} − ${b}`,
+
+    hundreds - b,
+
+    "💯 Hunderter-Minus",
+
+    "Tipp: Ziehe zuerst die Zehner und dann die Einer ab."
+  );
+}
+
+
+/* -----------------------------------------------------
+   4. MAL + PLUS
+   Beispiele:
+   4 · 6 + 12
+   7 · 5 + 13
+----------------------------------------------------- */
+
+function generateMixedMultiply(){
+
+  const a = rand(2,9);
+
+  const b = rand(2,9);
+
+  const c = rand(5,25);
+
+  const product = a * b;
+
+  const answer = product + c;
+
+  return createTask(
+
+    `${a} · ${b} + ${c}`,
+
+    answer,
+
+    "✖️ Mal + Plus",
+
+    `Tipp: Rechne zuerst ${a} · ${b} und addiere danach ${c}.`
+  );
+}
+
+
+/* -----------------------------------------------------
+   5. MAL MIT ZWEISTELLIGER ZAHL
+   Beispiele:
+   7 · 16
+   5 · 23
+----------------------------------------------------- */
+
+function generateMultiply(){
+
+  const a = rand(2,9);
+
+  const b = rand(11,25);
+
+  return createTask(
+
+    `${a} · ${b}`,
+
+    a * b,
+
+    "✖️ Mal",
+
+    `Tipp: Zerlege ${b} in Zehner und Einer.`
+  );
+}
+
+
+/* -----------------------------------------------------
+   6. TEILEN
+   Beispiele:
+   123 : 3
+   288 : 4
+
+   WICHTIG:
+   Der Dividend wird immer aus
+   Divisor × Ergebnis erzeugt.
+   Dadurch gibt es KEINE Kommazahlen.
+----------------------------------------------------- */
+
+function generateDivision(){
+
+  const divisor =
+    rand(2,9);
+
+  const quotient =
+    rand(10,50);
+
+  const dividend =
+    divisor * quotient;
+
+  return createTask(
+
+    `${dividend} : ${divisor}`,
+
+    quotient,
+
+    "➗ Teilen",
+
+    `Tipp: Frage dich: Welche Zahl · ${divisor} ergibt ${dividend}?`
+  );
+}
+
+
+/* =====================================================
+   AUFGABEN AUSWÄHLEN
+===================================================== */
+
+function generateTaskByType(type){
+
+  switch(type){
+
+    case "plus":
+      return generatePlus();
+
+    case "minus":
+      return generateMinus();
+
+    case "hundreds":
+      return generateHundreds();
+
+    case "mixedMultiply":
+      return generateMixedMultiply();
+
+    case "multiply":
+      return generateMultiply();
+
+    case "divide":
+      return generateDivision();
+
+    default:
+      return generatePlus();
+  }
+}
+
+
+/* -----------------------------------------------------
+   GEMISCHTE AUFGABEN
+----------------------------------------------------- */
+
+function generateMixedTask(){
+
+  const types = [
+
+    "plus",
+    "minus",
+    "hundreds",
+    "mixedMultiply",
+    "multiply",
+    "divide"
 
   ];
 
-  const p = choose(examples);
-
-  return {
-    q:`${p[0]} − ${p[1]}`,
-    a:p[0] - p[1],
-    type:"➖ Minus",
-    difficulty:"Zweizellig",
-    key:`minus-${p[0]}-${p[1]}`
-  };
-
+  return generateTaskByType(
+    choose(types)
+  );
 }
 
 
-/* =========================================================
-   HUNDERTER MINUS ZAHL
-========================================================= */
-
-function createHundredsSubtraction(){
-
-  const examples = [
-
-    [600,12],
-    [300,19],
-    [700,12],
-    [200,18],
-
-    [500,18],
-    [900,11],
-    [600,14],
-    [700,13],
-
-    [400,15],
-    [300,16],
-    [700,18],
-    [800,17]
-
-  ];
-
-  const p = choose(examples);
-
-  return {
-    q:`${p[0]} − ${p[1]}`,
-    a:p[0] - p[1],
-    type:"➖ Hunderter − Zahl",
-    difficulty:"Knifflig",
-    key:`hund-${p[0]}-${p[1]}`
-  };
-
-}
-
-
-/* =========================================================
-   MAL + PLUS
-========================================================= */
-
-function createMultiplicationPlus(){
-
-  const examples = [
-
-    [4,6,12],
-    [5,4,65],
-    [8,4,32],
-
-    [6,8,24],
-    [4,4,41],
-    [3,9,44],
-
-    [7,4,33],
-    [5,7,53],
-    [6,6,25]
-
-  ];
-
-  const p = choose(examples);
-
-  return {
-    q:`${p[0]} · ${p[1]} + ${p[2]}`,
-    a:p[0] * p[1] + p[2],
-    type:"✖️ Mal + Plus",
-    difficulty:"Gemischt",
-    key:`mulplus-${p.join("-")}`
-  };
-
-}
-
-
-/* =========================================================
-   MALAUFGABEN
-========================================================= */
-
-function createMultiplication(){
-
-  const examples = [
-
-    [7,16],
-    [6,35],
-    [5,26],
-
-    [5,23],
-    [7,42],
-    [6,38],
-
-    [4,29],
-    [5,28],
-    [3,66]
-
-  ];
-
-  const p = choose(examples);
-
-  return {
-    q:`${p[0]} · ${p[1]}`,
-    a:p[0] * p[1],
-    type:"✖️ Mal",
-    difficulty:"Zweistellig",
-    key:`mul-${p[0]}-${p[1]}`
-  };
-
-}
-
-
-/* =========================================================
-   DIVISION
-========================================================= */
-
-function createDivision(){
-
-  const examples = [
-
-    [123,3],
-    [186,3],
-    [159,3],
-    [273,3],
-
-    [208,4],
-    [288,4],
-    [244,4],
-    [364,4],
-
-    [255,5],
-    [405,5],
-    [155,5],
-    [305,5]
-
-  ];
-
-  const p = choose(examples);
-
-  return {
-    q:`${p[0]} : ${p[1]}`,
-    a:p[0] / p[1],
-    type:"➗ Teilen",
-    difficulty:"Ohne Rest",
-    key:`div-${p[0]}-${p[1]}`
-  };
-
-}
-
-
-/* =========================================================
-   AUFGABE ERZEUGEN
-========================================================= */
-
-function generateTask(){
-
-  if(settings.mode === "focus"){
-
-    return choose([
-
-      createHundredsSubtraction,
-      createMultiplication,
-      createMultiplicationPlus,
-      createDivision
-
-    ])();
-
-  }
-
-
-  if(settings.operation === "plus"){
-
-    return createAddition();
-
-  }
-
-
-  if(settings.operation === "minus"){
-
-    return Math.random() < .55
-      ? createSubtraction()
-      : createHundredsSubtraction;
-
-  }
-
-
-  if(settings.operation === "mulplus"){
-
-    return createMultiplicationPlus();
-
-  }
-
-
-  if(settings.operation === "mul"){
-
-    return createMultiplication();
-
-  }
-
-
-  if(settings.operation === "div"){
-
-    return createDivision();
-
-  }
-
-
-  /* Gemischt */
-
-  return choose([
-
-    createAddition,
-    createSubtraction,
-    createHundredsSubtraction,
-    createMultiplicationPlus,
-    createMultiplication,
-    createDivision
-
-  ])();
-
-}
-
-
-/* =========================================================
-   AUFGABENLISTE
-========================================================= */
+/* -----------------------------------------------------
+   AUFGABENLISTE ERSTELLEN
+----------------------------------------------------- */
 
 function createTasks(){
 
   const result = [];
 
-  /*
-    Bei "Gemischt" versuchen wir,
-    unterschiedliche Aufgabentypen zu verteilen.
-  */
+  const used = new Set();
 
-  if(settings.operation === "mix"){
+  let attempts = 0;
 
-    const types = [
+  while(
+    result.length < settings.amount &&
+    attempts < 500
+  ){
 
-      createAddition,
-      createSubtraction,
-      createHundredsSubtraction,
-      createMultiplicationPlus,
-      createMultiplication,
-      createDivision
+    attempts++;
 
-    ];
+    let task;
 
-    for(let i=0;i<Number(settings.amount);i++){
+    if(settings.type === "mixed"){
 
-      result.push(
-        types[i % types.length]()
-      );
+      task = generateMixedTask();
 
+    }else{
+
+      task =
+        generateTaskByType(
+          settings.type
+        );
     }
 
-    /* Reihenfolge zufällig mischen */
 
-    result.sort(
-      () => Math.random() - .5
-    );
+    /*
+      Jede Aufgabe bekommt einen eindeutigen
+      Text-Schlüssel.
+    */
 
-  }else{
+    const key = task.text;
 
-    for(
-      let i=0;
-      i<Number(settings.amount);
-      i++
-    ){
+    if(!used.has(key)){
 
-      result.push(
-        generateTask()
-      );
+      used.add(key);
 
+      result.push(task);
     }
-
   }
 
-  return result;
 
+  /*
+    Sicherheitsprüfung:
+    Falls aus irgendeinem Grund nicht genug
+    unterschiedliche Aufgaben erzeugt wurden,
+    werden weitere Aufgaben ergänzt.
+  */
+
+  while(result.length < settings.amount){
+
+    const task =
+      settings.type === "mixed"
+        ? generateMixedTask()
+        : generateTaskByType(settings.type);
+
+    result.push(task);
+  }
+
+
+  return result;
 }
 
 
-/* =========================================================
-   TRAINING STARTEN
-========================================================= */
+/* =====================================================
+   SCREENS
+===================================================== */
 
-function startTraining(customTasks){
+function showScreen(screenId){
+
+  $("startScreen")
+    .classList.add("hidden");
+
+  $("trainingScreen")
+    .classList.add("hidden");
+
+  $("summaryScreen")
+    .classList.add("hidden");
+
+
+  $(screenId)
+    .classList.remove("hidden");
+}
+
+
+/* =====================================================
+   TRAINING STARTEN
+===================================================== */
+
+function startTraining(customTasks = null){
 
   clearInterval(timer);
 
-  tasks = customTasks
-    ? customTasks.map(x => ({...x}))
-    : createTasks();
 
-  current = 0;
-  score = 0;
-  seconds = 0;
-  checked = false;
+  if(customTasks){
+
+    tasks = customTasks.map(task => ({
+
+      text: String(task.text),
+
+      answer: Number(task.answer),
+
+      type: String(task.type),
+
+      tip: String(task.tip || "")
+
+    }));
+
+  }else{
+
+    tasks = createTasks();
+
+  }
+
+
   answers = [];
 
-  $("totalNo").textContent =
-    tasks.length;
+  wrongTasks = [];
 
-  $("score").textContent = "0";
-  $("timer").textContent = "00:00";
+  currentIndex = 0;
 
-  showScreen("trainingScreen");
+  score = 0;
 
-  showTask();
+  seconds = 0;
 
-  timer = setInterval(()=>{
-
-    seconds++;
-
-    $("timer").textContent =
-      formatTime(seconds);
-
-  },1000);
-
-}
+  taskChecked = false;
 
 
-/* =========================================================
-   AUFGABE ANZEIGEN
-========================================================= */
+  /*
+    Münzen bleiben über mehrere Trainings
+    erhalten.
+  */
 
-function showTask(){
+  coins =
+    getStorage(
+      "matheTrainerCoins",
+      0
+    );
 
-  const task =
-    tasks[current];
+  playerLevel =
+    getStorage(
+      "matheTrainerLevel",
+      1
+    );
 
-  $("currentNo").textContent =
-    current + 1;
 
   $("totalNo").textContent =
     tasks.length;
@@ -1575,77 +1776,203 @@ function showTask(){
   $("coins").textContent =
     coins;
 
-  $("levelText").textContent =
-    level;
+  $("level").textContent =
+    playerLevel;
 
-  $("timer").textContent =
-    formatTime(seconds);
 
-  const percent =
-    Math.round(
-      current / tasks.length * 100
+  showScreen(
+    "trainingScreen"
+  );
+
+
+  showTask();
+
+
+  timer =
+    setInterval(() => {
+
+      seconds++;
+
+      $("timer").textContent =
+        formatTime(seconds);
+
+    },1000);
+}
+
+
+/* =====================================================
+   AUFGABE ANZEIGEN
+===================================================== */
+
+function showTask(){
+
+  const task =
+    tasks[currentIndex];
+
+
+  /*
+    Sicherheitsprüfung:
+    Sollte jemals ein ungültiges Objekt
+    entstehen, wird keine undefined-Aufgabe
+    angezeigt.
+  */
+
+  if(
+    !task ||
+    typeof task.text !== "string" ||
+    typeof task.answer !== "number" ||
+    Number.isNaN(task.answer)
+  ){
+
+    console.error(
+      "Ungültige Aufgabe:",
+      task
     );
 
+    task =
+      createTask(
+        "5 + 5",
+        10,
+        "➕ Plus",
+        "Rechne 5 + 5."
+      );
+  }
+
+
+  $("currentNo").textContent =
+    currentIndex + 1;
+
+  $("totalNo").textContent =
+    tasks.length;
+
+  $("score").textContent =
+    score;
+
+  $("coins").textContent =
+    coins;
+
+  $("level").textContent =
+    playerLevel;
+
+
+  const progress =
+    (currentIndex / tasks.length) * 100;
+
   $("progress").style.width =
-    percent + "%";
+    progress + "%";
+
 
   $("typeBadge").textContent =
     task.type;
 
-  $("difficultyBadge").textContent =
-    task.difficulty;
 
-  $("rewardBadge").textContent =
-    getLiveReward();
+  $("difficultyBadge").textContent =
+    getDifficulty(task);
+
+
+  /*
+    DIE WICHTIGE ZEILE:
+    Nur task.text wird angezeigt.
+    Dadurch kann hier kein
+    "undefined = undefined"
+    entstehen.
+  */
 
   $("task").textContent =
-    task.q + " = ?";
+    `${currentIndex + 1}. ${task.text} = ?`;
+
 
   $("answer").value = "";
+
+  $("feedback").textContent = "";
 
   $("feedback").className =
     "feedback";
 
-  $("feedback").textContent =
+
+  $("reward").textContent =
     "";
 
-  $("rewardLive").textContent =
-    "";
 
   $("tipBox").classList.add(
     "hidden"
   );
 
-  $("tipBox").innerHTML =
+  $("tipBox").textContent =
     "";
 
-  $("checkBtn").textContent =
+
+  $("checkButton").textContent =
     "Prüfen";
 
-  checked = false;
 
-  setTimeout(()=>{
+  taskChecked = false;
+
+
+  setTimeout(() => {
+
     $("answer").focus();
-  },50);
 
+  },100);
 }
 
 
-/* =========================================================
+/* -----------------------------------------------------
+   SCHWIERIGKEIT
+----------------------------------------------------- */
+
+function getDifficulty(task){
+
+  if(
+    task.type.includes("Plus")
+  ){
+    return "Zweizellig";
+  }
+
+  if(
+    task.type.includes("Hunderter")
+  ){
+    return "Hunderter";
+  }
+
+  if(
+    task.type.includes("Teilen")
+  ){
+    return "Geteilt";
+  }
+
+  if(
+    task.type.includes("Mal")
+  ){
+    return "Malaufgabe";
+  }
+
+  return "Übung";
+}
+
+
+/* =====================================================
    ANTWORT PRÜFEN
-========================================================= */
+===================================================== */
 
 function checkAnswer(){
 
-  if(checked){
+  /*
+    Wenn bereits geprüft wurde,
+    geht der Button zur nächsten Aufgabe.
+  */
+
+  if(taskChecked){
 
     nextTask();
-    return;
 
+    return;
   }
+
 
   const input =
     $("answer").value.trim();
+
 
   if(input === ""){
 
@@ -1653,43 +1980,59 @@ function checkAnswer(){
       "feedback bad";
 
     $("feedback").textContent =
-      "✏️ Bitte zuerst eine Antwort eingeben.";
+      "✏️ Bitte gib eine Antwort ein.";
 
     return;
-
   }
+
 
   const value =
     Number(input);
 
+
   const task =
-    tasks[current];
+    tasks[currentIndex];
+
 
   const correct =
-    value === task.a;
+    value === task.answer;
 
-  answers[current] = {
-    ...task,
-    entered:value,
-    correct
+
+  answers[currentIndex] = {
+
+    text: task.text,
+
+    answer: task.answer,
+
+    type: task.type,
+
+    entered: value,
+
+    correct: correct
+
   };
 
 
   if(correct){
 
     score++;
+
     coins++;
 
+
     updateLevel();
+
 
     $("feedback").className =
       "feedback ok";
 
     $("feedback").textContent =
-      "✅ Richtig! +1 Münze";
+      "✅ Richtig! Super gemacht!";
 
-    $("rewardLive").textContent =
-      getUnlockMessage();
+
+    $("reward").textContent =
+      getRewardMessage();
+
 
   }else{
 
@@ -1697,18 +2040,31 @@ function checkAnswer(){
       "feedback bad";
 
     $("feedback").textContent =
-      "❌ Nicht ganz. Lösung: " +
-      task.a;
+      `❌ Leider falsch. Die Lösung ist ${task.answer}.`;
 
-    saveMistake(task);
 
     $("tipBox").classList.remove(
       "hidden"
     );
 
     $("tipBox").innerHTML =
-      "<strong>💡 Tipp:</strong> " +
-      getTip(task);
+      `<strong>💡 Tipp:</strong> ${task.tip}`;
+
+
+    wrongTasks.push({
+
+      text: task.text,
+
+      answer: task.answer,
+
+      type: task.type,
+
+      tip: task.tip
+
+    });
+
+
+    saveMistake(task);
 
   }
 
@@ -1719,410 +2075,555 @@ function checkAnswer(){
   $("coins").textContent =
     coins;
 
-  $("levelText").textContent =
-    level;
+  $("level").textContent =
+    playerLevel;
 
-  $("rewardBadge").textContent =
-    getLiveReward();
 
-  $("checkBtn").textContent =
-    current < tasks.length - 1
+  $("checkButton").textContent =
+    currentIndex <
+    tasks.length - 1
       ? "Nächste Aufgabe"
       : "Ergebnis anschauen";
 
-  checked = true;
 
+  taskChecked = true;
 }
 
 
-/* =========================================================
-   TIPPS
-========================================================= */
-
-function getTip(task){
-
-  if(task.type === "➕ Plus"){
-
-    return "Rechne zuerst die Einer und danach die Zehner. Du kannst auch in Zehnerschritten rechnen.";
-
-  }
-
-  if(task.type === "➖ Minus"){
-
-    return "Rechne Einer und Zehner Schritt für Schritt. Wenn nötig, kannst du einen Zehner ausleihen.";
-
-  }
-
-  if(task.type === "➖ Hunderter − Zahl"){
-
-    return "Ziehe zuerst die Zehner und dann die Einer ab. Beispiel: 600 − 12 = 600 − 10 − 2.";
-
-  }
-
-  if(task.type === "✖️ Mal + Plus"){
-
-    return "Punkt vor Strich: Zuerst die Malaufgabe rechnen, danach die Plusaufgabe.";
-
-  }
-
-  if(task.type === "✖️ Mal"){
-
-    return "Zerlege die zweistellige Zahl. Beispiel: 7 · 16 = 7 · 10 + 7 · 6.";
-
-  }
-
-  if(task.type === "➗ Teilen"){
-
-    return "Denke an die passende Malaufgabe. Beispiel: 123 : 3 bedeutet: 3 · ? = 123.";
-
-  }
-
-  return "Rechne die Aufgabe Schritt für Schritt.";
-
-}
-
-
-/* =========================================================
+/* =====================================================
    NÄCHSTE AUFGABE
-========================================================= */
+===================================================== */
 
 function nextTask(){
 
-  current++;
+  currentIndex++;
 
-  if(current >= tasks.length){
+
+  if(
+    currentIndex >= tasks.length
+  ){
 
     showSummary();
-    return;
 
+    return;
   }
 
-  showTask();
 
+  showTask();
 }
 
 
-/* =========================================================
+/* =====================================================
+   LEVEL
+===================================================== */
+
+function updateLevel(){
+
+  if(coins >= 20){
+
+    playerLevel = 4;
+
+  }else if(coins >= 15){
+
+    playerLevel = 3;
+
+  }else if(coins >= 5){
+
+    playerLevel = 2;
+
+  }else{
+
+    playerLevel = 1;
+  }
+
+
+  setStorage(
+    "matheTrainerCoins",
+    coins
+  );
+
+  setStorage(
+    "matheTrainerLevel",
+    playerLevel
+  );
+}
+
+
+/* =====================================================
+   BELOHNUNGEN
+===================================================== */
+
+function getRewardMessage(){
+
+  if(coins === 5){
+
+    return "🎉 Hund freigeschaltet! 🐶";
+
+  }
+
+  if(coins === 10){
+
+    return "🎉 Katze freigeschaltet! 🐱";
+
+  }
+
+  if(coins === 15){
+
+    return "🎉 Einhorn freigeschaltet! 🦄";
+
+  }
+
+  if(coins === 20){
+
+    return "👑 Mathe-König!";
+
+  }
+
+  return "🪙 +1 Münze";
+}
+
+
+function getReward(){
+
+  if(coins >= 20){
+
+    return "👑 Mathe-König";
+
+  }
+
+  if(coins >= 15){
+
+    return "🦄 Einhorn";
+
+  }
+
+  if(coins >= 10){
+
+    return "🐱 Katze";
+
+  }
+
+  if(coins >= 5){
+
+    return "🐶 Hund";
+
+  }
+
+  return "🎁 Weiter üben!";
+}
+
+
+/* =====================================================
    FEHLER SPEICHERN
-========================================================= */
+===================================================== */
 
 function saveMistake(task){
 
   let mistakes =
-    safeStorageGet(
+    getStorage(
       "matheTrainerMistakes",
       []
     );
 
+
+  /*
+    Gleiche Aufgabe nicht mehrfach
+    speichern.
+  */
+
   mistakes =
     mistakes.filter(
-      x => x.key !== task.key
+      item =>
+        item.text !== task.text
     );
 
-  mistakes.unshift(task);
+
+  mistakes.unshift({
+
+    text: task.text,
+
+    answer: task.answer,
+
+    type: task.type,
+
+    tip: task.tip
+
+  });
+
 
   mistakes =
-    mistakes.slice(0,10);
+    mistakes.slice(0,20);
 
-  safeStorageSet(
+
+  setStorage(
     "matheTrainerMistakes",
     mistakes
   );
-
 }
 
 
-/* =========================================================
-   LEVEL
-========================================================= */
-
-function updateLevel(){
-
-  if(coins >= 15){
-
-    level = 3;
-
-  }else if(coins >= 5){
-
-    level = 2;
-
-  }else{
-
-    level = 1;
-
-  }
-
-  saveProgress();
-
-}
-
-
-/* =========================================================
-   BELOHNUNGEN
-========================================================= */
-
-function getUnlockMessage(){
-
-  if(coins === 5)
-    return "🎉 Hund freigeschaltet! Level 2!";
-
-  if(coins === 10)
-    return "🎉 Katze freigeschaltet!";
-
-  if(coins === 15)
-    return "🦄 Einhorn freigeschaltet! Level 3!";
-
-  if(coins === 20)
-    return "👑 Mathe-König erreicht!";
-
-  return "";
-
-}
-
-
-function getLiveReward(){
-
-  if(coins >= 20)
-    return "👑 Mathe-König";
-
-  if(coins >= 15)
-    return "🦄 Einhorn";
-
-  if(coins >= 10)
-    return "🐱 Katze";
-
-  if(coins >= 5)
-    return "🐶 Hund";
-
-  return "🎁 Noch keine Belohnung";
-
-}
-
-
-function getStars(percent){
-
-  if(percent >= 95)
-    return "⭐⭐⭐";
-
-  if(percent >= 80)
-    return "⭐⭐";
-
-  if(percent >= 60)
-    return "⭐";
-
-  return "💪";
-
-}
-
-
-function getFinalReward(percent){
-
-  if(percent >= 95)
-    return "👑 Mathe-König";
-
-  if(percent >= 80)
-    return "🥇 Gold-Pokal";
-
-  if(percent >= 50)
-    return "🥈 Silber-Pokal";
-
-  return "🥉 Bronze-Pokal";
-
-}
-
-
-/* =========================================================
+/* =====================================================
    AUSWERTUNG
-========================================================= */
+===================================================== */
 
 function showSummary(){
 
   clearInterval(timer);
 
+
   const total =
     tasks.length;
+
 
   const wrong =
     total - score;
 
+
   const percent =
     Math.round(
-      score / total * 100
+      (score / total) * 100
     );
 
-  $("finalPercent").textContent =
-    percent;
 
-  $("finalStars").textContent =
-    getStars(percent);
+  $("finalPercent").textContent =
+    percent + "%";
+
 
   $("finalCorrect").textContent =
     score;
 
+
   $("finalWrong").textContent =
     wrong;
+
 
   $("finalCoins").textContent =
     coins;
 
+
   $("finalLevel").textContent =
-    level;
+    playerLevel;
+
 
   $("finalTime").textContent =
     formatTime(seconds);
+
+
+  $("finalStars").textContent =
+    getStars(percent);
+
 
   $("finalReward").textContent =
     getFinalReward(percent);
 
 
-  wrongRepeatTasks =
-    answers
-      .filter(
-        x => x && !x.correct
-      )
-      .map(x => ({
-        q:x.q,
-        a:x.a,
-        type:x.type,
-        difficulty:"Fehlertraining",
-        key:x.key
-      }));
+  renderSummaryLists();
 
-
-  renderLists();
 
   saveHighscore(
     percent,
     total
   );
 
+
   showScreen(
     "summaryScreen"
   );
-
 }
 
 
-/* =========================================================
-   LISTEN
-========================================================= */
+/* -----------------------------------------------------
+   STERNE
+----------------------------------------------------- */
 
-function renderLists(){
+function getStars(percent){
 
-  const wrong =
+  if(percent >= 95){
+
+    return "⭐⭐⭐";
+
+  }
+
+  if(percent >= 80){
+
+    return "⭐⭐";
+
+  }
+
+  if(percent >= 60){
+
+    return "⭐";
+
+  }
+
+  return "💪";
+}
+
+
+/* -----------------------------------------------------
+   ENDERGEBNIS
+----------------------------------------------------- */
+
+function getFinalReward(percent){
+
+  if(percent >= 95){
+
+    return "👑 Mathe-König";
+
+  }
+
+  if(percent >= 80){
+
+    return "🥇 Gold-Pokal";
+
+  }
+
+  if(percent >= 50){
+
+    return "🥈 Silber-Pokal";
+
+  }
+
+  return "🥉 Bronze-Pokal";
+}
+
+
+/* =====================================================
+   LISTEN DER AUSWERTUNG
+===================================================== */
+
+function renderSummaryLists(){
+
+  const wrongList =
     $("wrongList");
 
-  const all =
+  const allList =
     $("allList");
 
-  wrong.innerHTML = "";
-  all.innerHTML = "";
+
+  wrongList.innerHTML = "";
+
+  allList.innerHTML = "";
 
 
-  if(wrongRepeatTasks.length === 0){
+  const wrongAnswers =
+    answers.filter(
+      item =>
+        item &&
+        item.correct === false
+    );
 
-    wrong.innerHTML =
+
+  if(
+    wrongAnswers.length === 0
+  ){
+
+    wrongList.innerHTML =
       `<div class="row">
-        <span>Alles richtig!</span>
-        <span>🎉</span>
+        <span>🎉 Alles richtig!</span>
+        <span>✅</span>
       </div>`;
 
   }else{
 
-    wrongRepeatTasks.forEach(
-      (task,index)=>{
+    wrongAnswers.forEach(
+      (item,index) => {
 
-        wrong.innerHTML +=
+        wrongList.innerHTML +=
           `<div class="row wrong">
             <span>
-              ${index+1}. ${task.q} = ${task.a}
+              ${index + 1}. ${escapeHTML(item.text)}
+              = ${item.answer}
             </span>
             <span>❌</span>
           </div>`;
-
       }
     );
-
   }
 
 
   answers.forEach(
-    (answer,index)=>{
+    (item,index) => {
 
-      if(!answer) return;
+      if(!item){
+        return;
+      }
 
-      const cls =
-        answer.correct
-          ? "row"
-          : "row wrong";
 
-      const icon =
-        answer.correct
+      const mark =
+        item.correct
           ? "✅"
           : "❌";
 
-      all.innerHTML +=
+
+      const cls =
+        item.correct
+          ? "row"
+          : "row wrong";
+
+
+      allList.innerHTML +=
         `<div class="${cls}">
           <span>
-            ${index+1}. ${answer.q} = ${answer.a}
+            ${index + 1}. ${escapeHTML(item.text)}
+            = ${item.answer}
           </span>
-          <span>${icon}</span>
+          <span>${mark}</span>
         </div>`;
-
     }
   );
-
 }
 
 
-/* =========================================================
+/* -----------------------------------------------------
+   HTML SICHER DARSTELLEN
+----------------------------------------------------- */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+/* =====================================================
    FEHLER WIEDERHOLEN
-========================================================= */
+===================================================== */
 
 function repeatWrong(){
 
-  if(wrongRepeatTasks.length === 0){
+  if(
+    wrongTasks.length === 0
+  ){
 
-    startTraining();
-    return;
-
-  }
-
-  startTraining(
-    wrongRepeatTasks
-  );
-
-}
-
-
-/* =========================================================
-   SCREENS
-========================================================= */
-
-function showScreen(id){
-
-  [
-    "startScreen",
-    "trainingScreen",
-    "summaryScreen"
-  ].forEach(screen => {
-
-    $(screen).classList.add(
-      "hidden"
+    alert(
+      "Es gibt keine Fehler zum Wiederholen. 🎉"
     );
 
-  });
+    return;
+  }
 
-  $(id).classList.remove(
-    "hidden"
+
+  /*
+    Die fehlerhaften Aufgaben werden
+    als vollständige Aufgabenobjekte
+    wieder verwendet.
+  */
+
+  const repeatTasks =
+    wrongTasks.map(
+      task => ({
+
+        text: String(task.text),
+
+        answer: Number(task.answer),
+
+        type: String(task.type),
+
+        tip: String(task.tip || "")
+
+      })
+    );
+
+
+  startTraining(
+    shuffle(repeatTasks)
   );
-
 }
 
 
-/* =========================================================
+/* =====================================================
+   HIGHSCORE
+===================================================== */
+
+function saveHighscore(
+  percent,
+  total
+){
+
+  const old =
+    getStorage(
+      "matheTrainerHighscore",
+      null
+    );
+
+
+  const current = {
+
+    percent: percent,
+
+    total: total,
+
+    score: score,
+
+    seconds: seconds,
+
+    date:
+      new Date()
+        .toLocaleDateString(
+          "de-DE"
+        )
+
+  };
+
+
+  /*
+    Bei gleichem Prozentwert
+    gewinnt die schnellere Zeit.
+  */
+
+  const isBetter =
+    !old ||
+    percent > old.percent ||
+    (
+      percent === old.percent &&
+      seconds < old.seconds
+    );
+
+
+  if(isBetter){
+
+    setStorage(
+      "matheTrainerHighscore",
+      current
+    );
+  }
+
+
+  loadHighscore();
+}
+
+
+function loadHighscore(){
+
+  const hs =
+    getStorage(
+      "matheTrainerHighscore",
+      null
+    );
+
+
+  if(!hs){
+
+    $("headerHighscore").textContent =
+      "🏆 Noch kein Highscore";
+
+    return;
+  }
+
+
+  $("headerHighscore").textContent =
+    `🏆 Highscore: ${hs.percent}%`;
+}
+
+
+/* =====================================================
    STARTSEITE
-========================================================= */
+===================================================== */
 
 function goHome(){
 
@@ -2133,324 +2634,253 @@ function goHome(){
   );
 
   loadHighscore();
-
 }
 
 
-/* =========================================================
-   FORTSCHRITT
-========================================================= */
+/* =====================================================
+   FORTSCHRITT LÖSCHEN
+===================================================== */
 
-function saveProgress(){
-
-  safeStorageSet(
-    "matheTrainerCoins",
-    coins
-  );
-
-  safeStorageSet(
-    "matheTrainerLevel",
-    level
-  );
-
-}
-
-
-function loadProgress(){
-
-  coins =
-    safeStorageGet(
-      "matheTrainerCoins",
-      0
-    );
-
-  level =
-    safeStorageGet(
-      "matheTrainerLevel",
-      1
-    );
-
-}
-
-
-/* =========================================================
-   HIGHSCORE
-========================================================= */
-
-function saveHighscore(
-  percent,
-  total
-){
-
-  const old =
-    safeStorageGet(
-      "matheTrainerHighscore",
-      null
-    );
-
-  const result = {
-    percent:percent,
-    total:total,
-    score:score,
-    seconds:seconds,
-    date:new Date()
-      .toLocaleDateString("de-DE")
-  };
-
-
-  if(
-    !old ||
-    percent > old.percent
-  ){
-
-    safeStorageSet(
-      "matheTrainerHighscore",
-      result
-    );
-
-  }
-
-  loadHighscore();
-
-}
-
-
-function loadHighscore(){
-
-  const hs =
-    safeStorageGet(
-      "matheTrainerHighscore",
-      null
-    );
-
-  $("headerHighscore").textContent =
-    hs
-      ? `🏆 Highscore: ${hs.percent}%`
-      : "🏆 Noch kein Highscore";
-
-}
-
-
-/* =========================================================
-   ALLES ZURÜCKSETZEN
-========================================================= */
-
-function resetAll(){
+function resetProgress(){
 
   const confirmed =
     confirm(
-      "Möchtest du Highscore, Münzen und Fehlerliste wirklich löschen?"
+      "Möchtest du wirklich alle gespeicherten Münzen, Level, Fehler und den Highscore löschen?"
     );
 
-  if(!confirmed) return;
 
-  safeStorageRemove(
-    "matheTrainerHighscore"
-  );
+  if(!confirmed){
+    return;
+  }
 
-  safeStorageRemove(
-    "matheTrainerMistakes"
-  );
 
-  safeStorageRemove(
+  removeStorage(
     "matheTrainerCoins"
   );
 
-  safeStorageRemove(
+  removeStorage(
     "matheTrainerLevel"
   );
 
+  removeStorage(
+    "matheTrainerMistakes"
+  );
+
+  removeStorage(
+    "matheTrainerHighscore"
+  );
+
+
   coins = 0;
-  level = 1;
+
+  playerLevel = 1;
+
 
   loadHighscore();
 
+
+  alert(
+    "Der Fortschritt wurde gelöscht."
+  );
 }
 
 
-/* =========================================================
+/* =====================================================
    OPTIONEN
-========================================================= */
-
-function setupOptions(){
+===================================================== */
 
 
-  /* Aufgabenarten */
+/* Aufgabenart */
 
-  document
-    .querySelector("#opOptions")
-    .addEventListener(
-      "click",
-      event => {
+$("typeOptions")
+  .addEventListener(
+    "click",
+    event => {
 
-        const button =
-          event.target.closest(
-            ".option"
-          );
-
-        if(!button) return;
+      const button =
+        event.target.closest(
+          ".option"
+        );
 
 
-        document
-          .querySelectorAll(
-            "#opOptions .option"
-          )
-          .forEach(btn => {
+      if(!button){
+        return;
+      }
 
-            btn.classList.remove(
+
+      $("typeOptions")
+        .querySelectorAll(
+          ".option"
+        )
+        .forEach(
+          item => {
+
+            item.classList.remove(
               "active"
             );
 
-            btn.setAttribute(
+            item.setAttribute(
               "aria-pressed",
               "false"
             );
-
-          });
-
-
-        button.classList.add(
-          "active"
-        );
-
-        button.setAttribute(
-          "aria-pressed",
-          "true"
+          }
         );
 
 
-        settings.operation =
-          button.dataset.op;
-
-      }
-    );
-
-
-  /* Trainingstyp */
-
-  document
-    .querySelectorAll(
-      "[data-mode]"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          document
-            .querySelectorAll(
-              "[data-mode]"
-            )
-            .forEach(btn => {
-
-              btn.classList.remove(
-                "active"
-              );
-
-              btn.setAttribute(
-                "aria-pressed",
-                "false"
-              );
-
-            });
-
-
-          button.classList.add(
-            "active"
-          );
-
-          button.setAttribute(
-            "aria-pressed",
-            "true"
-          );
-
-
-          settings.mode =
-            button.dataset.mode;
-
-        }
+      button.classList.add(
+        "active"
       );
 
-    });
+      button.setAttribute(
+        "aria-pressed",
+        "true"
+      );
 
 
-  /* Anzahl */
-
-  document
-    .querySelectorAll(
-      "[data-amount]"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          document
-            .querySelectorAll(
-              "[data-amount]"
-            )
-            .forEach(btn => {
-
-              btn.classList.remove(
-                "active"
-              );
-
-              btn.setAttribute(
-                "aria-pressed",
-                "false"
-              );
-
-            });
+      settings.type =
+        button.dataset.type;
+    }
+  );
 
 
-          button.classList.add(
-            "active"
-          );
+/* Anzahl */
 
-          button.setAttribute(
-            "aria-pressed",
-            "true"
-          );
+$("amountOptions")
+  .addEventListener(
+    "click",
+    event => {
+
+      const button =
+        event.target.closest(
+          ".option"
+        );
 
 
-          settings.amount =
-            Number(
-              button.dataset.amount
+      if(!button){
+        return;
+      }
+
+
+      $("amountOptions")
+        .querySelectorAll(
+          ".option"
+        )
+        .forEach(
+          item => {
+
+            item.classList.remove(
+              "active"
             );
 
-        }
+            item.setAttribute(
+              "aria-pressed",
+              "false"
+            );
+          }
+        );
+
+
+      button.classList.add(
+        "active"
       );
 
-    });
+      button.setAttribute(
+        "aria-pressed",
+        "true"
+      );
 
 
-  /* Enter zum Prüfen */
+      settings.amount =
+        Number(
+          button.dataset.amount
+        );
+    }
+  );
 
-  $("answer")
-    .addEventListener(
-      "keydown",
-      event => {
 
-        if(event.key === "Enter"){
+/* =====================================================
+   BUTTONS
+===================================================== */
 
-          checkAnswer();
+$("startButton")
+  .addEventListener(
+    "click",
+    () => startTraining()
+  );
 
-        }
 
+$("resetButton")
+  .addEventListener(
+    "click",
+    resetProgress
+  );
+
+
+$("checkButton")
+  .addEventListener(
+    "click",
+    checkAnswer
+  );
+
+
+$("homeButton")
+  .addEventListener(
+    "click",
+    goHome
+  );
+
+
+$("newTrainingButton")
+  .addEventListener(
+    "click",
+    () => startTraining()
+  );
+
+
+$("repeatWrongButton")
+  .addEventListener(
+    "click",
+    repeatWrong
+  );
+
+
+$("summaryHomeButton")
+  .addEventListener(
+    "click",
+    goHome
+  );
+
+
+$("printButton")
+  .addEventListener(
+    "click",
+    () => window.print()
+  );
+
+
+/* =====================================================
+   ENTER-TASTE
+===================================================== */
+
+$("answer")
+  .addEventListener(
+    "keydown",
+    event => {
+
+      if(event.key === "Enter"){
+
+        event.preventDefault();
+
+        checkAnswer();
       }
-    );
+    }
+  );
 
-}
 
-
-/* =========================================================
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
-setupOptions();
-loadProgress();
 loadHighscore();
 
 </script>
