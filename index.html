@@ -1,108 +1,55 @@
-// -----------------------------
-// Zufallsfunktion
-// -----------------------------
-function rand(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mathe-Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// -----------------------------
-// Aufgabenarten wie im Foto
-// -----------------------------
-function genPlus() {
-  const a = rand(10, 99);
-  const b = rand(10, 99);
-  return { task: `${a} + ${b}`, solution: a + b, type: "plus" };
-}
+<div class="app">
+  <div class="card">
 
-function genMinus() {
-  let a = rand(20, 99);
-  let b = rand(10, a);
-  return { task: `${a} - ${b}`, solution: a - b, type: "minus" };
-}
+    <div class="header">
+      <div class="brand">
+        <div class="logo">🧮</div>
+        <div>
+          <h1>Mathe-Trainer</h1>
+          <p class="subtitle">Für 9-Jährige</p>
+        </div>
+      </div>
+      <div id="headerHighscore" class="badge">Highscore: <span id="valHighscore">0</span></div>
+    </div>
 
-function genBigMinus() {
-  const a = [200,300,400,500,600,700,800,900][rand(0,7)];
-  const b = rand(10, 20);
-  return { task: `${a} - ${b}`, solution: a - b, type: "bigminus" };
-}
+    <div class="content">
 
-function genMulPlus() {
-  const a = rand(3, 9);
-  const b = rand(3, 9);
-  const c = rand(10, 70);
-  return { task: `${a} × ${b} + ${c}`, solution: a * b + c, type: "mulplus" };
-}
+      <!-- SETUP SCREEN -->
+      <div id="screenSetup">
+        <h2>Einstellungen</h2>
 
-function genMul() {
-  const a = rand(20, 70);
-  const b = rand(3, 9);
-  return { task: `${a} × ${b}`, solution: a * b, type: "mul" };
-}
+        <p>Rechenart:</p>
+        <div class="options" id="optType">
+          <div class="option active" data-value="mix">Mix</div>
+          <div class="option" data-value="plus">Plus</div>
+          <div class="option" data-value="minus">Minus</div>
+          <div class="option" data-value="mal">Mal</div>
+        </div>
 
-function genDiv() {
-  const divisors = [3,4,5];
-  const d = divisors[rand(0,2)];
-  const result = rand(30, 100);
-  const a = result * d;
-  return { task: `${a} ÷ ${d}`, solution: result, type: "div" };
-}
+        <p>Anzahl der Fragen:</p>
+        <div class="options" id="optCount">
+          <div class="option active" data-value="10">10</div>
+          <div class="option" data-value="15">15</div>
+          <div class="option" data-value="20">20</div>
+        </div>
 
-// -----------------------------
-// Liste aller Typen
-// -----------------------------
-const ALL_TYPES = ["plus", "minus", "bigminus", "mulplus", "mul", "div"];
+        <button class="btn" id="btnStart">Start</button>
+      </div>
 
-// -----------------------------
-// Mix-Modus mit 3er-Blöcken
-// -----------------------------
-let mixOrder = [];
-let mixIndex = 0;
-let blockCounter = 0;
+      <!-- QUIZ SCREEN -->
+      <div id="screenQuiz" class="hidden">
+        <div class="task-box">
+          <div id="taskText" class="task"></div>
+          <input id="answerInput" class="answer" type="number" autocomplete="off">
+        </div>
 
-function prepareMixOrder() {
-  mixOrder = [...ALL_TYPES].sort(() => Math.random() - 0.5);
-  mixIndex = 0;
-  blockCounter = 0;
-}
-
-function generateMixedTask() {
-  const currentType = mixOrder[mixIndex];
-  const task = generateByType(currentType);
-
-  blockCounter++;
-
-  if (blockCounter >= 3) {
-    mixIndex++;
-    blockCounter = 0;
-
-    if (mixIndex >= mixOrder.length) {
-      prepareMixOrder();
-    }
-  }
-
-  return task;
-}
-
-// -----------------------------
-// Generator nach Typ
-// -----------------------------
-function generateByType(type) {
-  switch(type) {
-    case "plus": return genPlus();
-    case "minus": return genMinus();
-    case "bigminus": return genBigMinus();
-    case "mulplus": return genMulPlus();
-    case "mul": return genMul();
-    case "div": return genDiv();
-    default: return genPlus();
-  }
-}
-
-// -----------------------------
-// Hauptfunktion
-// -----------------------------
-function generateTask(mode) {
-  if (mode === "mix") return generateMixedTask();
-  if (mode === "plus") return genPlus();
-  if (mode === "minus") return genMinus();
-  if
