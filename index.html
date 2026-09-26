@@ -8,7 +8,6 @@ function rand(min, max) {
 // -----------------------------
 // Aufgabenarten wie im Foto
 // -----------------------------
-
 function genPlus() {
   const a = rand(10, 99);
   const b = rand(10, 99);
@@ -54,6 +53,37 @@ function genDiv() {
 const ALL_TYPES = ["plus", "minus", "bigminus", "mulplus", "mul", "div"];
 
 // -----------------------------
+// Mix-Modus mit 3er-Blöcken
+// -----------------------------
+let mixOrder = [];
+let mixIndex = 0;
+let blockCounter = 0;
+
+function prepareMixOrder() {
+  mixOrder = [...ALL_TYPES].sort(() => Math.random() - 0.5);
+  mixIndex = 0;
+  blockCounter = 0;
+}
+
+function generateMixedTask() {
+  const currentType = mixOrder[mixIndex];
+  const task = generateByType(currentType);
+
+  blockCounter++;
+
+  if (blockCounter >= 3) {
+    mixIndex++;
+    blockCounter = 0;
+
+    if (mixIndex >= mixOrder.length) {
+      prepareMixOrder();
+    }
+  }
+
+  return task;
+}
+
+// -----------------------------
 // Generator nach Typ
 // -----------------------------
 function generateByType(type) {
@@ -69,58 +99,10 @@ function generateByType(type) {
 }
 
 // -----------------------------
-// Mix-Modus mit 3er-Blöcken
-// -----------------------------
-
-let mixOrder = [];       // Reihenfolge der Typen
-let mixIndex = 0;        // Welcher Block gerade aktiv ist
-let blockCounter = 0;    // Wie viele Aufgaben im aktuellen Block gestellt wurden
-
-function prepareMixOrder() {
-  // Zufällige Reihenfolge aller Typen
-  mixOrder = [...ALL_TYPES].sort(() => Math.random() - 0.5);
-  mixIndex = 0;
-  blockCounter = 0;
-}
-
-function generateMixedTask() {
-  const currentType = mixOrder[mixIndex];
-  const task = generateByType(currentType);
-
-  blockCounter++;
-
-  // Wenn 3 Aufgaben gestellt → nächster Typ
-  if (blockCounter >= 3) {
-    mixIndex++;
-    blockCounter = 0;
-
-    // Wenn alle Typen durch → neu mischen
-    if (mixIndex >= mixOrder.length) {
-      prepareMixOrder();
-    }
-  }
-
-  return task;
-}
-
-// -----------------------------
-// Hauptfunktion für deinen Trainer
+// Hauptfunktion
 // -----------------------------
 function generateTask(mode) {
-  if (mode === "mix") {
-    return generateMixedTask();
-  }
-
-  // Einzelmodus (Plus, Minus, Mal)
-  switch(mode) {
-    case "plus": return genPlus();
-    case "minus": return genMinus();
-    case "mal": return genMul();
-    default: return generateMixedTask();
-  }
-}
-
-// -----------------------------
-// Beim Start des Spiels Mix vorbereiten
-// -----------------------------
-prepareMixOrder();
+  if (mode === "mix") return generateMixedTask();
+  if (mode === "plus") return genPlus();
+  if (mode === "minus") return genMinus();
+  if
