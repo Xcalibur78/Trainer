@@ -826,9 +826,9 @@ h1{
 
       <p class="hint">
         Die Aufgaben werden jedes Mal neu erzeugt.
-        Bei Division gibt es nur Aufgaben ohne Rest.
-        Die letzte Ziffer des Dividenden ist dabei
-        durch den Divisor teilbar.
+        Bei Division gibt es ausschließlich Aufgaben,
+        die ohne Rest aufgehen und eine ganze Zahl als
+        Ergebnis haben.
       </p>
 
     </div>
@@ -1486,19 +1486,13 @@ function generateMultiply(){
 
 /* =====================================================
    TEILEN
-   KINDGERECHTER:
-   - nur Divisoren 2, 3, 4, 5
-   - keine Division mit Rest
-   - letzte Ziffer des Dividenden
-     ist durch den Divisor teilbar
+   GARANTIERT OHNE REST
 ===================================================== */
 
 function generateDivision(){
 
   /*
-    Wir verwenden bewusst nur kleine
-    Divisoren, damit die Aufgaben
-    leichter bleiben.
+    Wir wählen zuerst den Divisor.
   */
 
   const divisor =
@@ -1506,66 +1500,30 @@ function generateDivision(){
 
 
   /*
-    Mögliche letzte Ziffern.
-    Sie müssen durch den Divisor
-    teilbar sein.
-  */
-
-  const possibleLastDigits = [];
-
-  for(
-    let digit = 0;
-    digit <= 9;
-    digit++
-  ){
-
-    if(
-      digit % divisor === 0
-    ){
-
-      possibleLastDigits.push(
-        digit
-      );
-    }
-  }
-
-
-  /*
-    Keine 0 als letzte Stelle,
-    damit es kindgerechte Aufgaben
-    mit zweistelligem Dividend gibt.
-  */
-
-  const usableDigits =
-    possibleLastDigits.filter(
-      digit => digit !== 0
-    );
-
-
-  const lastDigit =
-    choose(usableDigits);
-
-
-  /*
-    Zehnerstelle:
-    1 bis 9
-  */
-
-  const tens =
-    rand(1,9);
-
-
-  const dividend =
-    tens * 10 + lastDigit;
-
-
-  /*
-    Durch die Konstruktion ist
-    der Dividend garantiert teilbar.
+    Danach wählen wir ein
+    ganzzahliges Ergebnis.
   */
 
   const quotient =
-    dividend / divisor;
+    rand(2,20);
+
+
+  /*
+    Der Dividend wird aus
+    Divisor × Ergebnis erzeugt.
+
+    Dadurch ist garantiert:
+
+    dividend / divisor = quotient
+
+    und somit:
+    - kein Rest
+    - keine Dezimalzahl
+    - keine Kommazahl
+  */
+
+  const dividend =
+    divisor * quotient;
 
 
   return createTask(
@@ -1576,7 +1534,7 @@ function generateDivision(){
 
     "➗ Teilen",
 
-    `Tipp: Die letzte Ziffer ${lastDigit} ist durch ${divisor} teilbar.`
+    `Tipp: Überlege, welche Zahl mal ${divisor} den Dividend ${dividend} ergibt.`
   );
 }
 
@@ -1838,12 +1796,6 @@ function startTraining(
 
 function showTask(){
 
-  /*
-    WICHTIG:
-    let statt const, weil im Fehlerfall
-    eine Ersatzaufgabe zugewiesen wird.
-  */
-
   let task =
     tasks[currentIndex];
 
@@ -1911,11 +1863,6 @@ function showTask(){
     getDifficulty(task);
 
 
-  /*
-    Hier wird ausschließlich
-    task.text angezeigt.
-  */
-
   $("task").textContent =
     `${currentIndex + 1}. ${task.text} = ?`;
 
@@ -1982,7 +1929,7 @@ function getDifficulty(task){
     task.type.includes("Teilen")
   ){
 
-    return "Leichtes Teilen";
+    return "Teilen ohne Rest";
   }
 
 
@@ -2003,11 +1950,6 @@ function getDifficulty(task){
 ===================================================== */
 
 function checkAnswer(){
-
-  /*
-    Wenn bereits geprüft:
-    nächste Aufgabe.
-  */
 
   if(taskChecked){
 
