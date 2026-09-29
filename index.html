@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mathe-Trainer die besten Kinder der Welt</title>
+<title>Mathe-Trainer – Rechnen üben</title>
 
 <style>
 :root{
@@ -650,8 +650,12 @@ h1{
   }
 }
 
-/* Druck */
+/* =========================
+   DRUCK
+========================= */
+
 @media print{
+
   body{
     background:#fff;
     padding:0;
@@ -682,10 +686,6 @@ h1{
 
 <div class="card">
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
 
   <div class="brand">
@@ -694,6 +694,7 @@ h1{
 
     <div>
       <h1>Mathe-Trainer</h1>
+
       <p class="subtitle">
         Rechnen üben – Schritt für Schritt
       </p>
@@ -715,9 +716,7 @@ h1{
 
 </header>
 
-
 <div class="content">
-
 
 <!-- ==================================================
      STARTSEITE
@@ -726,8 +725,6 @@ h1{
 <section id="startScreen">
 
   <div class="grid two">
-
-    <!-- EINSTELLUNGEN -->
 
     <div class="panel">
 
@@ -797,7 +794,6 @@ h1{
 
       </div>
 
-
       <p><strong>Anzahl Aufgaben</strong></p>
 
       <div class="options two" id="amountOptions">
@@ -828,16 +824,14 @@ h1{
 
       </div>
 
-
       <p class="hint">
         Die Aufgaben werden jedes Mal neu erzeugt.
-        Bei Division entstehen nur Aufgaben mit ganzen Ergebnissen.
+        Bei Division gibt es nur Aufgaben ohne Rest.
+        Die letzte Ziffer des Dividenden ist dabei
+        durch den Divisor teilbar.
       </p>
 
     </div>
-
-
-    <!-- BILD -->
 
     <div class="panel visual">
 
@@ -868,7 +862,7 @@ h1{
           </div>
 
           <div class="math-box math-yellow">
-            123 : 3
+            84 : 4
           </div>
 
         </div>
@@ -886,7 +880,6 @@ h1{
     </div>
 
   </div>
-
 
   <div
     class="grid two"
@@ -956,7 +949,6 @@ h1{
 
   </div>
 
-
   <div class="progress-wrap">
 
     <div
@@ -965,7 +957,6 @@ h1{
     ></div>
 
   </div>
-
 
   <div class="task-box">
 
@@ -987,14 +978,12 @@ h1{
 
     </div>
 
-
     <div
       id="task"
       class="task"
     >
       53 + 29 = ?
     </div>
-
 
     <input
       id="answer"
@@ -1008,24 +997,20 @@ h1{
 
   </div>
 
-
   <div
     id="tipBox"
     class="tip hidden"
   ></div>
-
 
   <div
     id="feedback"
     class="feedback"
   ></div>
 
-
   <div
     id="reward"
     class="reward"
   ></div>
-
 
   <div class="grid two">
 
@@ -1075,7 +1060,6 @@ h1{
     💪
   </div>
 
-
   <div class="stats">
 
     <div class="stat">
@@ -1108,7 +1092,6 @@ h1{
 
   </div>
 
-
   <div
     class="panel"
     style="text-align:center;margin-bottom:16px"
@@ -1133,7 +1116,6 @@ h1{
 
   </div>
 
-
   <div class="grid two">
 
     <div class="panel">
@@ -1149,7 +1131,6 @@ h1{
 
     </div>
 
-
     <div class="panel">
 
       <p class="panel-title">
@@ -1164,7 +1145,6 @@ h1{
     </div>
 
   </div>
-
 
   <div class="footer-actions">
 
@@ -1206,15 +1186,15 @@ h1{
 
 
 <script>
+
 /* =====================================================
    MATHE-TRAINER
-   Komplett neue Aufgabenstruktur
 ===================================================== */
 
 
-/* -----------------------------------------------------
+/* =====================================================
    EINSTELLUNGEN
------------------------------------------------------ */
+===================================================== */
 
 const settings = {
   type: "mixed",
@@ -1222,9 +1202,9 @@ const settings = {
 };
 
 
-/* -----------------------------------------------------
+/* =====================================================
    SPIELVARIABLEN
------------------------------------------------------ */
+===================================================== */
 
 let tasks = [];
 let answers = [];
@@ -1242,9 +1222,9 @@ let taskChecked = false;
 let wrongTasks = [];
 
 
-/* -----------------------------------------------------
+/* =====================================================
    HILFSFUNKTIONEN
------------------------------------------------------ */
+===================================================== */
 
 function $(id){
   return document.getElementById(id);
@@ -1252,6 +1232,7 @@ function $(id){
 
 
 function rand(min,max){
+
   return Math.floor(
     Math.random() * (max - min + 1)
   ) + min;
@@ -1259,8 +1240,11 @@ function rand(min,max){
 
 
 function choose(array){
+
   return array[
-    Math.floor(Math.random() * array.length)
+    Math.floor(
+      Math.random() * array.length
+    )
   ];
 }
 
@@ -1299,9 +1283,9 @@ function formatTime(totalSeconds){
 }
 
 
-/* -----------------------------------------------------
+/* =====================================================
    STORAGE
------------------------------------------------------ */
+===================================================== */
 
 function getStorage(key,fallback){
 
@@ -1334,7 +1318,7 @@ function setStorage(key,value){
 
   }catch(error){
 
-    /* Falls localStorage nicht verfügbar ist */
+    /* localStorage eventuell nicht verfügbar */
   }
 }
 
@@ -1352,10 +1336,9 @@ function removeStorage(key){
 }
 
 
-/* -----------------------------------------------------
+/* =====================================================
    AUFGABENOBJEKT
-   ALLE AUFGABEN HABEN DIE GLEICHE STRUKTUR
------------------------------------------------------ */
+===================================================== */
 
 function createTask(
   text,
@@ -1379,16 +1362,8 @@ function createTask(
 
 
 /* =====================================================
-   AUFGABEN GENERIEREN
+   PLUS
 ===================================================== */
-
-
-/* -----------------------------------------------------
-   1. PLUS
-   Beispiele:
-   53 + 29
-   47 + 35
------------------------------------------------------ */
 
 function generatePlus(){
 
@@ -1409,12 +1384,9 @@ function generatePlus(){
 }
 
 
-/* -----------------------------------------------------
-   2. MINUS
-   Beispiele:
-   88 - 19
-   74 - 28
------------------------------------------------------ */
+/* =====================================================
+   MINUS
+===================================================== */
 
 function generateMinus(){
 
@@ -1435,13 +1407,9 @@ function generateMinus(){
 }
 
 
-/* -----------------------------------------------------
-   3. HUNDERTER-MINUS
-   Beispiele:
-   600 - 12
-   400 - 27
-   800 - 35
------------------------------------------------------ */
+/* =====================================================
+   HUNDERTER-MINUS
+===================================================== */
 
 function generateHundreds(){
 
@@ -1464,12 +1432,9 @@ function generateHundreds(){
 }
 
 
-/* -----------------------------------------------------
-   4. MAL + PLUS
-   Beispiele:
-   4 · 6 + 12
-   7 · 5 + 13
------------------------------------------------------ */
+/* =====================================================
+   MAL + PLUS
+===================================================== */
 
 function generateMixedMultiply(){
 
@@ -1496,12 +1461,9 @@ function generateMixedMultiply(){
 }
 
 
-/* -----------------------------------------------------
-   5. MAL MIT ZWEISTELLIGER ZAHL
-   Beispiele:
-   7 · 16
-   5 · 23
------------------------------------------------------ */
+/* =====================================================
+   MAL
+===================================================== */
 
 function generateMultiply(){
 
@@ -1522,28 +1484,89 @@ function generateMultiply(){
 }
 
 
-/* -----------------------------------------------------
-   6. TEILEN
-   Beispiele:
-   123 : 3
-   288 : 4
-
-   WICHTIG:
-   Der Dividend wird immer aus
-   Divisor × Ergebnis erzeugt.
-   Dadurch gibt es KEINE Kommazahlen.
------------------------------------------------------ */
+/* =====================================================
+   TEILEN
+   KINDGERECHTER:
+   - nur Divisoren 2, 3, 4, 5
+   - keine Division mit Rest
+   - letzte Ziffer des Dividenden
+     ist durch den Divisor teilbar
+===================================================== */
 
 function generateDivision(){
 
-  const divisor =
-    rand(2,9);
+  /*
+    Wir verwenden bewusst nur kleine
+    Divisoren, damit die Aufgaben
+    leichter bleiben.
+  */
 
-  const quotient =
-    rand(10,50);
+  const divisor =
+    choose([2,3,4,5]);
+
+
+  /*
+    Mögliche letzte Ziffern.
+    Sie müssen durch den Divisor
+    teilbar sein.
+  */
+
+  const possibleLastDigits = [];
+
+  for(
+    let digit = 0;
+    digit <= 9;
+    digit++
+  ){
+
+    if(
+      digit % divisor === 0
+    ){
+
+      possibleLastDigits.push(
+        digit
+      );
+    }
+  }
+
+
+  /*
+    Keine 0 als letzte Stelle,
+    damit es kindgerechte Aufgaben
+    mit zweistelligem Dividend gibt.
+  */
+
+  const usableDigits =
+    possibleLastDigits.filter(
+      digit => digit !== 0
+    );
+
+
+  const lastDigit =
+    choose(usableDigits);
+
+
+  /*
+    Zehnerstelle:
+    1 bis 9
+  */
+
+  const tens =
+    rand(1,9);
+
 
   const dividend =
-    divisor * quotient;
+    tens * 10 + lastDigit;
+
+
+  /*
+    Durch die Konstruktion ist
+    der Dividend garantiert teilbar.
+  */
+
+  const quotient =
+    dividend / divisor;
+
 
   return createTask(
 
@@ -1553,13 +1576,13 @@ function generateDivision(){
 
     "➗ Teilen",
 
-    `Tipp: Frage dich: Welche Zahl · ${divisor} ergibt ${dividend}?`
+    `Tipp: Die letzte Ziffer ${lastDigit} ist durch ${divisor} teilbar.`
   );
 }
 
 
 /* =====================================================
-   AUFGABEN AUSWÄHLEN
+   AUFGABEN NACH TYP
 ===================================================== */
 
 function generateTaskByType(type){
@@ -1590,9 +1613,9 @@ function generateTaskByType(type){
 }
 
 
-/* -----------------------------------------------------
-   GEMISCHTE AUFGABEN
------------------------------------------------------ */
+/* =====================================================
+   GEMISCHT
+===================================================== */
 
 function generateMixedTask(){
 
@@ -1613,9 +1636,9 @@ function generateMixedTask(){
 }
 
 
-/* -----------------------------------------------------
+/* =====================================================
    AUFGABENLISTE ERSTELLEN
------------------------------------------------------ */
+===================================================== */
 
 function createTasks(){
 
@@ -1625,6 +1648,7 @@ function createTasks(){
 
   let attempts = 0;
 
+
   while(
     result.length < settings.amount &&
     attempts < 500
@@ -1632,11 +1656,14 @@ function createTasks(){
 
     attempts++;
 
+
     let task;
+
 
     if(settings.type === "mixed"){
 
-      task = generateMixedTask();
+      task =
+        generateMixedTask();
 
     }else{
 
@@ -1647,12 +1674,9 @@ function createTasks(){
     }
 
 
-    /*
-      Jede Aufgabe bekommt einen eindeutigen
-      Text-Schlüssel.
-    */
+    const key =
+      task.text;
 
-    const key = task.text;
 
     if(!used.has(key)){
 
@@ -1664,18 +1688,19 @@ function createTasks(){
 
 
   /*
-    Sicherheitsprüfung:
-    Falls aus irgendeinem Grund nicht genug
-    unterschiedliche Aufgaben erzeugt wurden,
-    werden weitere Aufgaben ergänzt.
+    Sicherheitsreserve.
   */
 
-  while(result.length < settings.amount){
+  while(
+    result.length < settings.amount
+  ){
 
     const task =
       settings.type === "mixed"
         ? generateMixedTask()
-        : generateTaskByType(settings.type);
+        : generateTaskByType(
+            settings.type
+          );
 
     result.push(task);
   }
@@ -1710,29 +1735,34 @@ function showScreen(screenId){
    TRAINING STARTEN
 ===================================================== */
 
-function startTraining(customTasks = null){
+function startTraining(
+  customTasks = null
+){
 
   clearInterval(timer);
 
 
   if(customTasks){
 
-    tasks = customTasks.map(task => ({
+    tasks =
+      customTasks.map(
+        task => ({
 
-      text: String(task.text),
+          text: String(task.text),
 
-      answer: Number(task.answer),
+          answer: Number(task.answer),
 
-      type: String(task.type),
+          type: String(task.type),
 
-      tip: String(task.tip || "")
+          tip: String(task.tip || "")
 
-    }));
+        })
+      );
 
   }else{
 
-    tasks = createTasks();
-
+    tasks =
+      createTasks();
   }
 
 
@@ -1749,16 +1779,12 @@ function startTraining(customTasks = null){
   taskChecked = false;
 
 
-  /*
-    Münzen bleiben über mehrere Trainings
-    erhalten.
-  */
-
   coins =
     getStorage(
       "matheTrainerCoins",
       0
     );
+
 
   playerLevel =
     getStorage(
@@ -1779,6 +1805,9 @@ function startTraining(customTasks = null){
   $("level").textContent =
     playerLevel;
 
+  $("timer").textContent =
+    "00:00";
+
 
   showScreen(
     "trainingScreen"
@@ -1789,14 +1818,17 @@ function startTraining(customTasks = null){
 
 
   timer =
-    setInterval(() => {
+    setInterval(
+      () => {
 
-      seconds++;
+        seconds++;
 
-      $("timer").textContent =
-        formatTime(seconds);
+        $("timer").textContent =
+          formatTime(seconds);
 
-    },1000);
+      },
+      1000
+    );
 }
 
 
@@ -1806,15 +1838,18 @@ function startTraining(customTasks = null){
 
 function showTask(){
 
-  const task =
+  /*
+    WICHTIG:
+    let statt const, weil im Fehlerfall
+    eine Ersatzaufgabe zugewiesen wird.
+  */
+
+  let task =
     tasks[currentIndex];
 
 
   /*
-    Sicherheitsprüfung:
-    Sollte jemals ein ungültiges Objekt
-    entstehen, wird keine undefined-Aufgabe
-    angezeigt.
+    Sicherheitsprüfung.
   */
 
   if(
@@ -1829,6 +1864,7 @@ function showTask(){
       task
     );
 
+
     task =
       createTask(
         "5 + 5",
@@ -1836,6 +1872,10 @@ function showTask(){
         "➕ Plus",
         "Rechne 5 + 5."
       );
+
+
+    tasks[currentIndex] =
+      task;
   }
 
 
@@ -1858,6 +1898,7 @@ function showTask(){
   const progress =
     (currentIndex / tasks.length) * 100;
 
+
   $("progress").style.width =
     progress + "%";
 
@@ -1871,11 +1912,8 @@ function showTask(){
 
 
   /*
-    DIE WICHTIGE ZEILE:
-    Nur task.text wird angezeigt.
-    Dadurch kann hier kein
-    "undefined = undefined"
-    entstehen.
+    Hier wird ausschließlich
+    task.text angezeigt.
   */
 
   $("task").textContent =
@@ -1909,43 +1947,52 @@ function showTask(){
   taskChecked = false;
 
 
-  setTimeout(() => {
-
-    $("answer").focus();
-
-  },100);
+  setTimeout(
+    () => {
+      $("answer").focus();
+    },
+    100
+  );
 }
 
 
-/* -----------------------------------------------------
+/* =====================================================
    SCHWIERIGKEIT
------------------------------------------------------ */
+===================================================== */
 
 function getDifficulty(task){
 
   if(
     task.type.includes("Plus")
   ){
+
     return "Zweizellig";
   }
+
 
   if(
     task.type.includes("Hunderter")
   ){
+
     return "Hunderter";
   }
+
 
   if(
     task.type.includes("Teilen")
   ){
-    return "Geteilt";
+
+    return "Leichtes Teilen";
   }
+
 
   if(
     task.type.includes("Mal")
   ){
+
     return "Malaufgabe";
   }
+
 
   return "Übung";
 }
@@ -1958,8 +2005,8 @@ function getDifficulty(task){
 function checkAnswer(){
 
   /*
-    Wenn bereits geprüft wurde,
-    geht der Button zur nächsten Aufgabe.
+    Wenn bereits geprüft:
+    nächste Aufgabe.
   */
 
   if(taskChecked){
@@ -2033,22 +2080,22 @@ function checkAnswer(){
     $("reward").textContent =
       getRewardMessage();
 
-
   }else{
 
     $("feedback").className =
       "feedback bad";
 
+
     $("feedback").textContent =
       `❌ Leider falsch. Die Lösung ist ${task.answer}.`;
 
 
-    $("tipBox").classList.remove(
-      "hidden"
-    );
+    $("tipBox")
+      .classList.remove("hidden");
+
 
     $("tipBox").innerHTML =
-      `<strong>💡 Tipp:</strong> ${task.tip}`;
+      `<strong>💡 Tipp:</strong> ${escapeHTML(task.tip)}`;
 
 
     wrongTasks.push({
@@ -2065,7 +2112,6 @@ function checkAnswer(){
 
 
     saveMistake(task);
-
   }
 
 
@@ -2142,6 +2188,7 @@ function updateLevel(){
     coins
   );
 
+
   setStorage(
     "matheTrainerLevel",
     playerLevel
@@ -2158,26 +2205,26 @@ function getRewardMessage(){
   if(coins === 5){
 
     return "🎉 Hund freigeschaltet! 🐶";
-
   }
+
 
   if(coins === 10){
 
     return "🎉 Katze freigeschaltet! 🐱";
-
   }
+
 
   if(coins === 15){
 
     return "🎉 Einhorn freigeschaltet! 🦄";
-
   }
+
 
   if(coins === 20){
 
     return "👑 Mathe-König!";
-
   }
+
 
   return "🪙 +1 Münze";
 }
@@ -2188,26 +2235,26 @@ function getReward(){
   if(coins >= 20){
 
     return "👑 Mathe-König";
-
   }
+
 
   if(coins >= 15){
 
     return "🦄 Einhorn";
-
   }
+
 
   if(coins >= 10){
 
     return "🐱 Katze";
-
   }
+
 
   if(coins >= 5){
 
     return "🐶 Hund";
-
   }
+
 
   return "🎁 Weiter üben!";
 }
@@ -2225,11 +2272,6 @@ function saveMistake(task){
       []
     );
 
-
-  /*
-    Gleiche Aufgabe nicht mehrfach
-    speichern.
-  */
 
   mistakes =
     mistakes.filter(
@@ -2332,70 +2374,71 @@ function showSummary(){
 }
 
 
-/* -----------------------------------------------------
+/* =====================================================
    STERNE
------------------------------------------------------ */
+===================================================== */
 
 function getStars(percent){
 
   if(percent >= 95){
 
     return "⭐⭐⭐";
-
   }
+
 
   if(percent >= 80){
 
     return "⭐⭐";
-
   }
+
 
   if(percent >= 60){
 
     return "⭐";
-
   }
+
 
   return "💪";
 }
 
 
-/* -----------------------------------------------------
+/* =====================================================
    ENDERGEBNIS
------------------------------------------------------ */
+===================================================== */
 
 function getFinalReward(percent){
 
   if(percent >= 95){
 
     return "👑 Mathe-König";
-
   }
+
 
   if(percent >= 80){
 
     return "🥇 Gold-Pokal";
-
   }
+
 
   if(percent >= 50){
 
     return "🥈 Silber-Pokal";
-
   }
+
 
   return "🥉 Bronze-Pokal";
 }
 
 
 /* =====================================================
-   LISTEN DER AUSWERTUNG
+   AUSWERTUNGSLISTEN
 ===================================================== */
 
 function renderSummaryLists(){
 
   const wrongList =
     $("wrongList");
+
 
   const allList =
     $("allList");
@@ -2475,9 +2518,9 @@ function renderSummaryLists(){
 }
 
 
-/* -----------------------------------------------------
+/* =====================================================
    HTML SICHER DARSTELLEN
------------------------------------------------------ */
+===================================================== */
 
 function escapeHTML(value){
 
@@ -2507,12 +2550,6 @@ function repeatWrong(){
     return;
   }
 
-
-  /*
-    Die fehlerhaften Aufgaben werden
-    als vollständige Aufgabenobjekte
-    wieder verwendet.
-  */
 
   const repeatTasks =
     wrongTasks.map(
@@ -2570,11 +2607,6 @@ function saveHighscore(
 
   };
 
-
-  /*
-    Bei gleichem Prozentwert
-    gewinnt die schnellere Zeit.
-  */
 
   const isBetter =
     !old ||
@@ -2658,13 +2690,16 @@ function resetProgress(){
     "matheTrainerCoins"
   );
 
+
   removeStorage(
     "matheTrainerLevel"
   );
 
+
   removeStorage(
     "matheTrainerMistakes"
   );
+
 
   removeStorage(
     "matheTrainerHighscore"
@@ -2686,11 +2721,8 @@ function resetProgress(){
 
 
 /* =====================================================
-   OPTIONEN
+   AUFGABENART OPTIONEN
 ===================================================== */
-
-
-/* Aufgabenart */
 
 $("typeOptions")
   .addEventListener(
@@ -2731,6 +2763,7 @@ $("typeOptions")
         "active"
       );
 
+
       button.setAttribute(
         "aria-pressed",
         "true"
@@ -2743,7 +2776,9 @@ $("typeOptions")
   );
 
 
-/* Anzahl */
+/* =====================================================
+   ANZAHL OPTIONEN
+===================================================== */
 
 $("amountOptions")
   .addEventListener(
@@ -2783,6 +2818,7 @@ $("amountOptions")
       button.classList.add(
         "active"
       );
+
 
       button.setAttribute(
         "aria-pressed",
